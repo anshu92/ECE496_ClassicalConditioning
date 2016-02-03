@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">ECE496_CC</string>
+    <string name="connect">Connect</string>
+    <string name="status">Connection Status:</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="refresh">Refresh</string>
+    <string name="connection">Connect To Devices</string>
+    <string name="version">Version:</string>
+    <string name="undefined">unknown</string>
+    <string name="calib_q">How does this picture make you feel?</string>
+
+
+</resources>
