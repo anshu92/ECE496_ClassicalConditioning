@@ -94,77 +94,67 @@ public class MuseConnectionService extends IntentService {
                 fileWriter.addAnnotationString(1, "ConnectActivity onCreate");
                 dataListener.setFileWriter(fileWriter);
 
-                String fname;
-                fname = "svminput";
-                String fpath = "/sdcard/" + fname;
-
-                File file = new File(fpath);
+                String fname = "/svminput";
+                File file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file.exists()) {
                     file.delete();
                 }
 
-                fname = "svminput.t";
-                fpath = "/sdcard/" + fname;
-
-                File file1 = new File(fpath);
+                fname = "/svminput.t";
+                File file1 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file1.exists()) {
                     file1.delete();
                 }
 
-                fname = "svmpredict";
-                fpath = "/sdcard/" + fname;
-
-                File file2 = new File(fpath);
+                fname = "/svmpredict";
+                File file2 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file2.exists()) {
                     file2.delete();
                 }
-                fname = "range1";
-                fpath = "/sdcard/" + fname;
-
-                File file3 = new File(fpath);
+                fname = "/range1";
+                File file3 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file3.exists()) {
                     file3.delete();
                 }
-                fname = "svminput.scale";
-                fpath = "/sdcard/" + fname;
-
-                File file4 = new File(fpath);
+                fname = "/svminput.scale";
+                File file4 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file4.exists()) {
                     file4.delete();
                 }
-                fname = "svminput.t.scale";
-                fpath = "/sdcard/" + fname;
-
-                File file5 = new File(fpath);
+                fname = "/svminput.t.scale";
+                File file5 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file5.exists()) {
                     file5.delete();
                 }
-                fname = "svminput.model";
-                fpath = "/sdcard/" + fname;
-
-                File file6 = new File(fpath);
+                fname = "/svminput.model";
+                File file6 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file6.exists()) {
                     file6.delete();
                 }
-                fname = "svminput.out";
-                fpath = "/sdcard/" + fname;
-
-                File file7 = new File(fpath);
+                fname = "/svminput.out";
+                File file7 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file7.exists()) {
                     file7.delete();
                 }
-                fname = "svmpredict.out";
-                fpath = "/sdcard/" + fname;
-
-                File file8 = new File(fpath);
+                fname = "/svmpredict.out";
+                File file8 = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS)
+                        + fname);
 
                 if (file8.exists()) {
                     file8.delete();
