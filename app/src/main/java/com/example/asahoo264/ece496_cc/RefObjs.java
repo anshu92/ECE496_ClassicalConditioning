@@ -1,9 +1,12 @@
 package com.example.asahoo264.ece496_cc;
 
+import android.app.Activity;
 import android.app.Application;
 import android.app.IntentService;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
+import android.widget.Toast;
 
 import com.interaxon.libmuse.Muse;
 
@@ -114,7 +117,7 @@ public class RefObjs extends Application{
     }
 
 
-    public static void register_event(boolean is_train, boolean seekbar_progress) throws IOException {
+    public static void register_event(final WeakReference<Activity> activityref, boolean is_train, boolean seekbar_progress) throws IOException {
         double alpha_sum = 0;
         double alpha_var_sum = 0;
         double alpha_mean;
@@ -175,7 +178,7 @@ public class RefObjs extends Application{
             emotion_label = 0;
 
         String fname;
-        String fcontent;
+        final String fcontent;
 
         if(is_train)
             fname = "svminput";
@@ -193,8 +196,8 @@ public class RefObjs extends Application{
 
         try {
             fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
-            //Toast.makeText(this, fcontent, Toast.LENGTH_SHORT).show();
 
+            Log.d("FCONTENT: ", fcontent);
             FileOutputStream fOut = new FileOutputStream(file,true);
             OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
             myOutWriter.append(fcontent);

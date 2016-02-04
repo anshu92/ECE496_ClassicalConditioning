@@ -303,6 +303,7 @@ class svm_train {
 }
 
 class svm_predict {
+    public static String acc = null;
     private static svm_print_interface svm_print_null = new svm_print_interface()
     {
         public void print(String s) {}
@@ -424,6 +425,7 @@ class svm_predict {
             FileOutputStream f = new FileOutputStream(file);
 
             String content = ("Accuracy = " + (double) correct / total * 100 + "% (" + correct + "/" + total + ") (classification)\n");
+            acc = content;
             byte[] b = content.getBytes();
             f.write(b);
         }

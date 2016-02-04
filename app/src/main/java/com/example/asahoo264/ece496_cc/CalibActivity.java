@@ -2,8 +2,10 @@ package com.example.asahoo264.ece496_cc;
 
 import android.app.ActionBar;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.BroadcastReceiver;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
@@ -19,6 +21,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.CountDownTimer;
 import android.os.Environment;
+import android.os.Looper;
 import android.support.v4.content.LocalBroadcastManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +40,7 @@ import com.interaxon.libmuse.MuseDataListener;
 import com.squareup.picasso.Picasso;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -1541,9 +1545,12 @@ public class CalibActivity extends AppCompatActivity {
     private final long interval = 1000;
     private long timeElapsed;
     private boolean timerHasStarted = false;
+        private boolean alert = false;
     private int counter=1;
     private int counter1=1;
-    private int happy_counter = 0;
+    private int ctr = 0;
+
+        private int happy_counter = 0;
     private int aversion_counter = 0;
     private boolean is_train = true;
     private int number_images = 10;
@@ -1565,7 +1572,7 @@ public class CalibActivity extends AppCompatActivity {
         public Intent mServiceIntent,mEventIntent, mEventIntent1;
         private WeakReference<MuseConnectionService.ConnectionListener> weakconn;
         private WeakReference<MuseConnectionService.DataListener> weakdat;
-
+        private WeakReference<Activity> weakActivity;
 
 
 
@@ -1580,7 +1587,7 @@ public class CalibActivity extends AppCompatActivity {
                 timertext = (TextView)findViewById(R.id.timer);
                 timer = new CalibCountDownTimer(startTime,interval);
 
-               final WeakReference<Activity> weakActivity = new WeakReference<Activity>(this);
+               weakActivity = new WeakReference<Activity>(this);
 
 
                 //   mServiceIntent = new Intent(getApplicationContext(), MuseConnectionService.class);
@@ -1669,7 +1676,7 @@ public class CalibActivity extends AppCompatActivity {
                 Runnable myRunnable = new Runnable() {
                         @Override
                         public void run() {
-                                int ctr = 0;
+                                counter =  1;
                                 while (ctr < number_images) {
 
                                            new Thread(new Runnable() {
@@ -1692,7 +1699,7 @@ public class CalibActivity extends AppCompatActivity {
                                                 public void run() {
                                                         RefObjs.start_of_event = false;
                                                         try {
-                                                                RefObjs.register_event(temp>(number_images/2),switch_state);
+                                                                RefObjs.register_event(weakActivity,temp<(number_images/2),switch_state);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();
                                                         }
@@ -1737,7 +1744,7 @@ public class CalibActivity extends AppCompatActivity {
                                 String[] training2 = {"/sdcard/svminput.scale", "/sdcard/svminput.scale.model"};
                                 String[] testing1 = {"/sdcard/svminput.t", "/sdcard/svminput.model", "/sdcard/svminput.out"};
                                 String[] testing2 = {"/sdcard/svminput.t.scale", "/sdcard/svminput.scale.model", "/sdcard/svminput.scale.out"};
-
+                                timer.start();
                                 try {
                                         svm_scale.main(scaling1);
                                 } catch(IOException e) {
@@ -1758,21 +1765,14 @@ public class CalibActivity extends AppCompatActivity {
                                 } catch (IOException e) {
                                         e.printStackTrace();
                                 }
-
+                                alert = true;
                         }
 
                         };
 
                                 Thread myThread = new Thread(myRunnable);
-                                myThread.start();
-
-
-
-
-
-
-
-
+                myThread.start();
+             
 
     }
 
@@ -1789,6 +1789,34 @@ public class CalibActivity extends AppCompatActivity {
         public void onFinish()
         {
             timertext.setText("Time's up!");
+
+                if(alert){
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                weakActivity.get());
+
+                        // set title
+                        alertDialogBuilder.setTitle("Calibration Complete : Results");
+
+                        // set dialog message
+                        alertDialogBuilder
+                                .setMessage(svm_predict.acc)
+                                .setCancelable(false)
+                                .setNeutralButton("DONE!", new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                                // if this button is clicked, close
+                                                // current activity
+                                                finish();
+                                        }
+                                });
+
+
+                        // create alert dialog
+                        AlertDialog alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
+
+                }
         }
 
         @Override
@@ -1820,6 +1848,7 @@ public class CalibActivity extends AppCompatActivity {
 
 
     }
+
 
 
         public void addBitmapToMemoryCache(String key, Bitmap bitmap) {
@@ -1885,6 +1914,9 @@ public class CalibActivity extends AppCompatActivity {
 //                }
 
         }
+
+
+
 
 
 }
