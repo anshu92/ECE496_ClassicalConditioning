@@ -1534,6 +1534,8 @@ public class CalibActivity extends AppCompatActivity {
 
     };
 
+    private static String dir_str = null;
+
     private int max_imageid = 730;
     private int min_imageid = 0;
     private int currentIndex=-1;
@@ -1582,10 +1584,12 @@ public class CalibActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calib);
-                sw = (ImageView) findViewById(R.id.imageSwitcher);
-                seekBar = (Switch)findViewById(R.id.switchbar);
-                timertext = (TextView)findViewById(R.id.timer);
-                timer = new CalibCountDownTimer(startTime,interval);
+        sw = (ImageView) findViewById(R.id.imageSwitcher);
+        seekBar = (Switch)findViewById(R.id.switchbar);
+        timertext = (TextView)findViewById(R.id.timer);
+        timer = new CalibCountDownTimer(startTime,interval);
+
+            dir_str = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
 
                weakActivity = new WeakReference<Activity>(this);
 
@@ -1737,15 +1741,79 @@ public class CalibActivity extends AppCompatActivity {
                                         public void run() {
                                                 timertext.setText("CALIBRATION DONE");
                                         }};
+
+                                String fname1 = "range1";
+                                File file1 = new File(dir_str, fname1);
+                                String fpath1 = file1.toString();
+
+                                String fname2 = "svminput";
+                                File file2 = new File(dir_str, fname2);
+                                String fpath2 = file2.toString();
+
+                                String fname3 = "svminput.scale";
+                                File file3 = new File(dir_str, fname3);
+                                String fpath3 = file3.toString();
                                 //ConnectActivity.start_recording = false;
-                                String[] scaling1 = {"-l", "-1", "-u", "1", "-s", "/sdcard/range1", "/sdcard/svminput"/*, ">"*/, "/sdcard/svminput.scale"};
-                                String[] scaling2 = {"-r", "/sdcard/range1", "/sdcard/svminput.t"/*, ">"*/, "/sdcard/svminput.t.scale"};
-                                String[] training1 = {"/sdcard/svminput", "/sdcard/svminput.model"};
-                                String[] training2 = {"/sdcard/svminput.scale", "/sdcard/svminput.scale.model"};
-                                String[] testing1 = {"/sdcard/svminput.t", "/sdcard/svminput.model", "/sdcard/svminput.out"};
-                                String[] testing2 = {"/sdcard/svminput.t.scale", "/sdcard/svminput.scale.model", "/sdcard/svminput.scale.out"};
+                                String[] scaling1 = {"-l", "-1", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
+
+                                fname1 = "range1";
+                                file1 = new File(dir_str, fname1);
+                                fpath1 = file1.toString();
+
+                                fname2 = "svminput.t";
+                                file2 = new File(dir_str, fname2);
+                                fpath2 = file2.toString();
+
+                                fname3 = "svminput.t.scale";
+                                file3 = new File(dir_str, fname3);
+                                fpath3 = file3.toString();
+                                String[] scaling2 = {"-r", fpath1, fpath2/*, ">"*/, fpath3};
+
+                                fname1 = "svminput";
+                                file1 = new File(dir_str, fname1);
+                                fpath1 = file1.toString();
+
+                                fname2 = "svminput.model";
+                                file2 = new File(dir_str, fname2);
+                                fpath2 = file2.toString();
+                                String[] training1 = {fpath1, fpath2};
+
+                                fname1 = "svminput.scale";
+                                file1 = new File(dir_str, fname1);
+                                fpath1 = file1.toString();
+
+                                fname2 = "svminput.scale.model";
+                                file2 = new File(dir_str, fname2);
+                                fpath2 = file2.toString();
+                                String[] training2 = {fpath1, fpath2};
+
+                                fname1 = "svminput.t";
+                                file1 = new File(dir_str, fname1);
+                                fpath1 = file1.toString();
+
+                                fname2 = "svminput.model";
+                                file2 = new File(dir_str, fname2);
+                                fpath2 = file2.toString();
+
+                                fname3 = "svminput.out";
+                                file3 = new File(dir_str, fname3);
+                                fpath3 = file3.toString();
+                                String[] testing1 = {fpath1, fpath2, fpath3};
+
+                                fname1 = "svminput.t.scale";
+                                file1 = new File(dir_str, fname1);
+                                fpath1 = file1.toString();
+
+                                fname2 = "svminput.scale.model";
+                                file2 = new File(dir_str, fname2);
+                                fpath2 = file2.toString();
+
+                                fname3 = "svminput.scale.out";
+                                file3 = new File(dir_str, fname3);
+                                fpath3 = file3.toString();
+                                String[] testing2 = {fpath1, fpath2, fpath3};
                                 timer.start();
-                                try {
+                                /*try {
                                         svm_scale.main(scaling1);
                                 } catch(IOException e) {
                                         e.printStackTrace();
@@ -1754,7 +1822,7 @@ public class CalibActivity extends AppCompatActivity {
                                         svm_scale.main(scaling2);
                                 } catch (IOException e) {
                                         e.printStackTrace();
-                                }
+                                }*/
                                 try {
                                         svm_train.main(training1);
                                 } catch (IOException e) {

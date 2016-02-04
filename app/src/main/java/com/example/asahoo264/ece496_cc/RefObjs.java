@@ -3,6 +3,7 @@ package com.example.asahoo264.ece496_cc;
 import android.app.Activity;
 import android.app.Application;
 import android.app.IntentService;
+import android.os.Environment;
 import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
@@ -39,7 +40,7 @@ public class RefObjs extends Application{
     private static RefObjs singleton;
     public static Muse muse = null;
 
-
+    private static String dir_str = null;
 
     public void RefObjs(){
     }
@@ -53,6 +54,7 @@ public class RefObjs extends Application{
     public void onCreate() {
         super.onCreate();
         singleton = this;
+        dir_str = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
     }
 
     public WeakReference<MuseConnectionService.ConnectionListener> getWeakConn() {
@@ -185,10 +187,7 @@ public class RefObjs extends Application{
         else
             fname = "svminput.t";
 
-        String fpath = "/sdcard/"+fname;
-
-        File file = new File(fpath);
-
+        File file = new File(dir_str, fname);
         // If file does not exists, then create it
         if (!file.exists()) {
             file.createNewFile();
@@ -271,13 +270,8 @@ public class RefObjs extends Application{
         }
         theta_var = theta_var_sum/theta_cnt;
 
-        String fname;
+        String fname = "svmpredict";
         String fcontent;
-
-
-        fname = "svmpredict";
-
-        String fpath = "/sdcard/"+fname;
 
         int emotion_label;
         if(emotion_val)
@@ -285,13 +279,11 @@ public class RefObjs extends Application{
         else
             emotion_label = 0;
 
-        File file = new File(fpath);
-
+        File file = new File(dir_str, fname);
         // If file does not exists, then create it
         if (!file.exists()) {
             file.createNewFile();
         }
-
         try {
             fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
             //Toast.makeText(this, fcontent, Toast.LENGTH_SHORT).show();
@@ -310,9 +302,17 @@ public class RefObjs extends Application{
 
         }
 
-        String fname1;
+        String fname1 = "svmpredict.out";
+        File file1 = new File(dir_str, fname1);
+        String fpath1 = file1.toString();
+
+        String fname2 = "svmpredict.model";
+        File file2 = new File(dir_str, fname2);
+        String fpath2 = file2.toString();
+        String fpath = file.toString();
+
         int prediction;
-        String[] testing1 = {"/sdcard/svmpredict", "/sdcard/svminput.model", "/sdcard/svmpredict.out"};
+        String[] testing1 = {fpath, fpath2, fpath1};
 
         try {
             svm_predict.main(testing1);
@@ -320,12 +320,7 @@ public class RefObjs extends Application{
             e.printStackTrace();
         }
 
-        fname1 = "svmpredict.out";
-
-        String fpath1 = "/sdcard/"+fname;
-
         Integer result;
-        File file1 = new File(fpath1);
 
         FileInputStream fIn = new FileInputStream(file1);
         result = fIn.read();
