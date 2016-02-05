@@ -1836,6 +1836,7 @@ public class CalibActivity extends AppCompatActivity {
                                 fname3 = "svminput.scale.out";
                                 file3 = new File(dir_str, fname3);
                                 fpath3 = file3.toString();
+
                                 String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
                                 timer.start();
                                 try {

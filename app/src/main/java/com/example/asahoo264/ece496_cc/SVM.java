@@ -420,8 +420,8 @@ class svm_predict {
         else {
             svm_predict.info("Accuracy = " + (double) correct / total * 100 +
                     "% (" + correct + "/" + total + ") (classification)\n");
-            String accuracy = "/sdcard/accuracy";
-            File file = new File(dir_str,"accuracy");
+
+            File file = new File(dir_str, "accuracy");
             FileOutputStream f = new FileOutputStream(file);
 
             String content = ("Accuracy = " + (double) correct / total * 100 + "% (" + correct + "/" + total + ") (classification)\n");
