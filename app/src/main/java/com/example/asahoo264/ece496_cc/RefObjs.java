@@ -28,14 +28,11 @@ public class RefObjs extends Application{
     public static WeakReference<MuseConnectionService.ConnectionListener> weakConn;
     public static WeakReference<MuseConnectionService.DataListener> weakData;
     public static boolean start_of_event=false;
-    public static double[] alpha_val = new double[2200];
-    public static double[] beta_val = new double[2200];
-    public static double[] gamma_val = new double[2200];
-    public static double[] theta_val = new double[2200];
-    public static int alpha_cnt = 0;
-    public static int beta_cnt = 0;
-    public static int gamma_cnt = 0;
-    public static int theta_cnt = 0;
+    public static ArrayList<Double> alpha_val = new ArrayList<Double>();
+    public static ArrayList<Double> beta_val = new ArrayList<Double>();
+    public static ArrayList<Double> gamma_val = new ArrayList<Double>();
+    public static ArrayList<Double> theta_val = new ArrayList<Double>();
+
 
     private static RefObjs singleton;
     public static Muse muse = null;
@@ -74,48 +71,34 @@ public class RefObjs extends Application{
     }
 
 
-    public static void updateAlphaAbsolute(final ArrayList<Double> data) {
-        double n = data.get(0);
-        if (start_of_event ) {
-            alpha_val[alpha_cnt++] = n;
+    public static void updateAlphaRelative(final ArrayList<Double> data) {
+        Double n = average(data);
+      //Log.d("alpha: ", n.toString());
+        if (start_of_event && n != null && !n.isNaN()) {
+            alpha_val.add(n);
         }
-        else {
-            alpha_cnt = 0;
 
-        }
     }
 
-    public static void updateBetaAbsolute(final ArrayList<Double> data) {
-        double n = data.get(0);
-        if (start_of_event ) {
-            beta_val[beta_cnt++] = n;
-        }
-        else {
-            beta_cnt = 0;
+    public static void updateBetaRelative(final ArrayList<Double> data) {
+        Double n = average(data);
+        if (start_of_event && n != null && !n.isNaN()) {
+            beta_val.add(n);        }
 
-        }
     }
 
-  public static void updateGammaAbsolute(final ArrayList<Double> data) {
-        double n = data.get(0);
-        if (start_of_event) {
-            gamma_val[gamma_cnt++] = n;
-        }
-        else {
-            gamma_cnt = 0;
+  public static void updateGammaRelative(final ArrayList<Double> data) {
+      Double n = average(data);
+      if (start_of_event && n != null && !n.isNaN()) {
+            gamma_val.add(n);        }
 
-        }
     }
 
-    public static void updateThetaAbsolute(final ArrayList<Double> data) {
-        double n = data.get(0);
-        if (start_of_event ) {
-            theta_val[theta_cnt++] = n;
-        }
-        else {
-            theta_cnt = 0;
+    public static void updateThetaRelative(final ArrayList<Double> data) {
+        Double n = average(data);
+        if (start_of_event && n != null && !n.isNaN()) {
+            theta_val.add(n);        }
 
-        }
     }
 
 
@@ -124,54 +107,78 @@ public class RefObjs extends Application{
         double alpha_var_sum = 0;
         double alpha_mean;
         double alpha_var;
-        for(int i = 0; i < alpha_val.length;i++){
-            alpha_sum  =  alpha_sum +  alpha_val[i];
+        for(int i = 0; i < alpha_val.size();i++){
+            alpha_sum  =  alpha_sum +  alpha_val.get(i).doubleValue();
         }
-        alpha_mean = alpha_sum/alpha_cnt;
-        for(int i = 0; i < alpha_val.length;i++){
-            alpha_var_sum  =  alpha_var_sum +  (alpha_val[i]-alpha_mean)*(alpha_val[i]-alpha_mean);
+        alpha_mean = alpha_sum/alpha_val.size();
+        for(int i = 0; i < alpha_val.size();i++){
+            alpha_var_sum  =  alpha_var_sum +  (alpha_val.get(i).doubleValue()-alpha_mean)*(alpha_val.get(i).doubleValue()-alpha_mean);
         }
-        alpha_var = alpha_var_sum/alpha_cnt;
+        alpha_var = alpha_var_sum/alpha_val.size();
+        if(alpha_val.size() == 0){
+            Log.d("Size","Zero");
+            alpha_var = 0;
+        }
+
+        alpha_val.clear();
+
 
         double beta_sum = 0;
         double beta_var_sum = 0;
         double beta_mean;
         double beta_var;
-        for(int i = 0; i < beta_val.length;i++){
-            beta_sum  =  beta_sum +  beta_val[i];
+        for(int i = 0; i < beta_val.size();i++){
+            beta_sum  =  beta_sum +  beta_val.get(i).doubleValue();
         }
-        beta_mean = beta_sum/beta_cnt;
-        for(int i = 0; i < beta_val.length;i++){
-            beta_var_sum  =  beta_var_sum +  (beta_val[i]-beta_mean)*(beta_val[i]-beta_mean);
+        beta_mean = beta_sum/beta_val.size();
+        for(int i = 0; i < beta_val.size();i++){
+            beta_var_sum  =  beta_var_sum +  (beta_val.get(i).doubleValue()-beta_mean)*(beta_val.get(i).doubleValue()-beta_mean);
         }
-        beta_var = beta_var_sum/beta_cnt;
+        beta_var = beta_var_sum/beta_val.size();
+
+        if(beta_val.size() == 0){
+            Log.d("Size","Zero");
+            beta_var = 0;
+        }
+
+        beta_val.clear();
 
         double gamma_sum = 0;
         double gamma_var_sum = 0;
         double gamma_mean;
         double gamma_var;
-        for(int i = 0; i < gamma_val.length;i++){
-            gamma_sum  =  gamma_sum +  gamma_val[i];
+        for(int i = 0; i < gamma_val.size();i++){
+            gamma_sum  =  gamma_sum +  gamma_val.get(i).doubleValue();
         }
-        gamma_mean = gamma_sum/gamma_cnt;
-        for(int i = 0; i < gamma_val.length;i++){
-            gamma_var_sum  =  gamma_var_sum +  (gamma_val[i]-gamma_mean)*(gamma_val[i]-gamma_mean);
+        gamma_mean = gamma_sum/gamma_val.size();
+        for(int i = 0; i < gamma_val.size();i++){
+            gamma_var_sum  =  gamma_var_sum +  (gamma_val.get(i).doubleValue()-gamma_mean)*(gamma_val.get(i).doubleValue()-gamma_mean);
         }
-        gamma_var = gamma_var_sum/gamma_cnt;
+        gamma_var = gamma_var_sum/gamma_val.size();
+        if(gamma_val.size() == 0){
+            Log.d("Size","Zero");
+            gamma_var = 0;
+        }
+        gamma_val.clear();
 
 
         double theta_sum = 0;
         double theta_var_sum = 0;
         double theta_mean;
         double theta_var;
-        for(int i = 0; i < theta_val.length;i++){
-            theta_sum  =  theta_sum +  theta_val[i];
+        for(int i = 0; i < theta_val.size();i++){
+            theta_sum  =  theta_sum +  theta_val.get(i).doubleValue();
         }
-        theta_mean = theta_sum/theta_cnt;
-        for(int i = 0; i < theta_val.length;i++){
-            theta_var_sum  =  theta_var_sum +  (theta_val[i]-theta_mean)*(theta_val[i]-theta_mean);
+        theta_mean = theta_sum/theta_val.size();
+        for(int i = 0; i < theta_val.size();i++){
+            theta_var_sum  =  theta_var_sum +  (theta_val.get(i).doubleValue()-theta_mean)*(theta_val.get(i).doubleValue()-theta_mean);
         }
-        theta_var = theta_var_sum/theta_cnt;
+        theta_var = theta_var_sum/theta_val.size();
+        if(alpha_val.size() == 0){
+            Log.d("Size","Zero");
+            theta_var = 0;
+        }
+        theta_val.clear();
 
         int emotion_label;
         if(seekbar_progress)
@@ -221,54 +228,54 @@ public class RefObjs extends Application{
         double alpha_var_sum = 0;
         double alpha_mean;
         double alpha_var;
-        for(int i = 0; i < alpha_val.length;i++){
-            alpha_sum  =  alpha_sum +  alpha_val[i];
+        for(int i = 0; i < alpha_val.size();i++){
+            alpha_sum  =  alpha_sum +  alpha_val.get(i).doubleValue();
         }
-        alpha_mean = alpha_sum/alpha_cnt;
-        for(int i = 0; i < alpha_val.length;i++){
-            alpha_var_sum  =  alpha_var_sum +  (alpha_val[i]-alpha_mean)*(alpha_val[i]-alpha_mean);
+        alpha_mean = alpha_sum/alpha_val.size();
+        for(int i = 0; i < alpha_val.size();i++){
+            alpha_var_sum  =  alpha_var_sum +  (alpha_val.get(i).doubleValue()-alpha_mean)*(alpha_val.get(i).doubleValue()-alpha_mean);
         }
-        alpha_var = alpha_var_sum/alpha_cnt;
+        alpha_var = alpha_var_sum/alpha_val.size();
 
         double beta_sum = 0;
         double beta_var_sum = 0;
         double beta_mean;
         double beta_var;
-        for(int i = 0; i < beta_val.length;i++){
-            beta_sum  =  beta_sum +  beta_val[i];
+        for(int i = 0; i < beta_val.size();i++){
+            beta_sum  =  beta_sum +  beta_val.get(i).doubleValue();
         }
-        beta_mean = beta_sum/beta_cnt;
-        for(int i = 0; i < beta_val.length;i++){
-            beta_var_sum  =  beta_var_sum +  (beta_val[i]-beta_mean)*(beta_val[i]-beta_mean);
+        beta_mean = beta_sum/beta_val.size();
+        for(int i = 0; i < beta_val.size();i++){
+            beta_var_sum  =  beta_var_sum +  (beta_val.get(i).doubleValue()-beta_mean)*(beta_val.get(i).doubleValue()-beta_mean);
         }
-        beta_var = beta_var_sum/beta_cnt;
+        beta_var = beta_var_sum/beta_val.size();
 
         double gamma_sum = 0;
         double gamma_var_sum = 0;
         double gamma_mean;
         double gamma_var;
-        for(int i = 0; i < gamma_val.length;i++){
-            gamma_sum  =  gamma_sum +  gamma_val[i];
+        for(int i = 0; i < gamma_val.size();i++){
+            gamma_sum  =  gamma_sum +  gamma_val.get(i).doubleValue();
         }
-        gamma_mean = gamma_sum/gamma_cnt;
-        for(int i = 0; i < gamma_val.length;i++){
-            gamma_var_sum  =  gamma_var_sum +  (gamma_val[i]-gamma_mean)*(gamma_val[i]-gamma_mean);
+        gamma_mean = gamma_sum/gamma_val.size();
+        for(int i = 0; i < gamma_val.size();i++){
+            gamma_var_sum  =  gamma_var_sum +  (gamma_val.get(i).doubleValue()-gamma_mean)*(gamma_val.get(i).doubleValue()-gamma_mean);
         }
-        gamma_var = gamma_var_sum/gamma_cnt;
+        gamma_var = gamma_var_sum/gamma_val.size();
 
 
         double theta_sum = 0;
         double theta_var_sum = 0;
         double theta_mean;
         double theta_var;
-        for(int i = 0; i < theta_val.length;i++){
-            theta_sum  =  theta_sum +  theta_val[i];
+        for(int i = 0; i < theta_val.size();i++){
+            theta_sum  =  theta_sum +  theta_val.get(i).doubleValue();
         }
-        theta_mean = theta_sum/theta_cnt;
-        for(int i = 0; i < theta_val.length;i++){
-            theta_var_sum  =  theta_var_sum +  (theta_val[i]-theta_mean)*(theta_val[i]-theta_mean);
+        theta_mean = theta_sum/theta_val.size();
+        for(int i = 0; i < theta_val.size();i++){
+            theta_var_sum  =  theta_var_sum +  (theta_val.get(i).doubleValue()-theta_mean)*(theta_val.get(i).doubleValue()-theta_mean);
         }
-        theta_var = theta_var_sum/theta_cnt;
+        theta_var = theta_var_sum/theta_val.size();
 
         String fname = "svmpredict";
         String fcontent;
@@ -331,6 +338,19 @@ public class RefObjs extends Application{
 
     }
 
+    private static Double average(ArrayList<Double> list) {
+        // 'average' is undefined if there are no elements in the list.
+        if (list == null || list.isEmpty())
+            return 0.0;
+        // Calculate the summation of the elements in the list
+        Double sum = 0d;
+        int n = list.size();
+        // Iterating manually is faster than using an enhanced for loop.
+        for (int i = 0; i < n; i++)
+            sum += list.get(i);
+        // We don't want to perform an integer division, so the cast is mandatory.
+        return (sum) / n;
+    }
 
 }
 

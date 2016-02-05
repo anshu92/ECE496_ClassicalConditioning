@@ -51,6 +51,7 @@ public class MuseConnectionService extends IntentService {
     private static boolean ON_PHONE = true;
     public static  boolean start_recording = false;
     private static boolean send_ref = false;
+    private static boolean done_conn = true;
     public static MuseConnectionService.ConnectionListener connectionListener = null;
     public static MuseConnectionService.DataListener dataListener = null;
 
@@ -185,10 +186,11 @@ public class MuseConnectionService extends IntentService {
                     " " + status;
 
             Log.i("Muse Headband", full);
-
             sendMessage(status);
 
         }
+
+
     }
 
     /**
@@ -226,47 +228,50 @@ public class MuseConnectionService extends IntentService {
                 }
             }
             final MuseDataPacket temp = p;
+            if(!temp.getValues().get(0).isNaN()) {
+                switch (p.getPacketType()) {
+                    case ALPHA_RELATIVE:
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RefObjs.updateAlphaRelative(temp.getValues());
 
-            switch (p.getPacketType()) {
-                case ALPHA_ABSOLUTE:
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            RefObjs.updateAlphaAbsolute(temp.getValues());
+                            }
+                        }).start();
 
-                        }
-                    }).start();
-                    break;
-                case BETA_ABSOLUTE:
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            RefObjs.updateBetaAbsolute(temp.getValues());
 
-                        }
-                    }).start();
-                    break;
-                case GAMMA_ABSOLUTE:
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            RefObjs.updateGammaAbsolute(temp.getValues());
+                        break;
+                    case BETA_RELATIVE:
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RefObjs.updateBetaRelative(temp.getValues());
 
-                        }
-                    }).start();
-                    break;
-                case THETA_ABSOLUTE:
-                    new Thread(new Runnable() {
-                        @Override
-                        public void run() {
-                            RefObjs.updateThetaAbsolute(temp.getValues());
+                            }
+                        }).start();
+                        break;
+                    case GAMMA_RELATIVE:
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RefObjs.updateGammaRelative(temp.getValues());
 
-                        }
-                    }).start();
-                    break;
+                            }
+                        }).start();
+                        break;
+                    case THETA_RELATIVE:
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RefObjs.updateThetaRelative(temp.getValues());
 
-                default:
-                    break;
+                            }
+                        }).start();
+                        break;
+
+                    default:
+                        break;
+                }
             }
         }
 

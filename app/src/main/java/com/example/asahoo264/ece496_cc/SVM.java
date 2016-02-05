@@ -334,7 +334,7 @@ class svm_predict {
         return Integer.parseInt(s);
     }
 
-    private static double predict(BufferedReader input, DataOutputStream output, svm_model model, int predict_probability) throws IOException
+    private static double predict(BufferedReader input, DataOutputStream output, svm_model model, int predict_probability, String dir_str) throws IOException
     {
         int correct = 0;
         int total = 0;
@@ -421,7 +421,7 @@ class svm_predict {
             svm_predict.info("Accuracy = " + (double) correct / total * 100 +
                     "% (" + correct + "/" + total + ") (classification)\n");
             String accuracy = "/sdcard/accuracy";
-            File file = new File(accuracy);
+            File file = new File(dir_str,"accuracy");
             FileOutputStream f = new FileOutputStream(file);
 
             String content = ("Accuracy = " + (double) correct / total * 100 + "% (" + correct + "/" + total + ") (classification)\n");
@@ -466,13 +466,14 @@ class svm_predict {
                     exit_with_help();
             }
         }
-        if(i>=argv.length-2)
+        if(i>=argv.length-3)
             exit_with_help();
         try
         {
             BufferedReader input = new BufferedReader(new FileReader(argv[i]));
             DataOutputStream output = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(argv[i+2])));
             svm_model model = svm.svm_load_model(argv[i+1]);
+            String dir_str = argv[i+3];
             if (model == null)
             {
                 System.err.print("can't open model file "+argv[i+1]+"\n");
@@ -493,7 +494,7 @@ class svm_predict {
                     svm_predict.info("Model supports probability estimates, but disabled in prediction.\n");
                 }
             }
-            ret = predict(input, output, model, predict_probability);
+            ret = predict(input, output, model, predict_probability, dir_str);
             input.close();
             output.close();
             return ret;

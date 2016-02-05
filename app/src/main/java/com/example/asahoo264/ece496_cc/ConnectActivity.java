@@ -160,13 +160,19 @@ public class ConnectActivity extends Activity implements OnClickListener{
                  * connection). Print all exceptions here.
                  */
 
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    try {
+                        configureLibrary();
 
-                configureLibrary();
-                try {
-                    RefObjs.muse.runAsynchronously();
-                } catch (Exception e) {
-                    Log.e("Muse Headband", e.toString());
+
+                    } catch (Exception e) {
+                        Log.e("Muse Headband", e.toString());
+                    }
+
                 }
+            });
 
 
 //Set the schedule function and rate
@@ -256,15 +262,17 @@ public class ConnectActivity extends Activity implements OnClickListener{
 
         RefObjs.muse.registerConnectionListener(MuseConnectionService.connectionListener);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
-                MuseDataPacketType.ALPHA_ABSOLUTE);
+                MuseDataPacketType.ALPHA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
-                MuseDataPacketType.BETA_ABSOLUTE);
+                MuseDataPacketType.BETA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
-                MuseDataPacketType.GAMMA_ABSOLUTE);
+                MuseDataPacketType.GAMMA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
-                MuseDataPacketType.THETA_ABSOLUTE);
-        RefObjs.muse.setPreset(MusePreset.PRESET_10);
+                MuseDataPacketType.THETA_RELATIVE);
+        RefObjs.muse.setPreset(MusePreset.PRESET_14);
         RefObjs.muse.enableDataTransmission(true);
+        RefObjs.muse.runAsynchronously();
+
 
     }
 

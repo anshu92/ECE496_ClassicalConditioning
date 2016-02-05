@@ -1683,7 +1683,20 @@ public class CalibActivity extends AppCompatActivity {
                                 counter =  1;
                                 while (ctr < number_images) {
 
-                                           new Thread(new Runnable() {
+                                        if (Arrays.asList(urls_aversion).contains(url[ctr])) {
+                                                emotion_val = false;
+                                        } else {
+                                                emotion_val = true;
+                                        }
+                                        if(ctr != 0){
+                                        if (emotion_val) {
+                                                sp.play(baby_laugh, 1, 1, 0, -1, 1);
+                                        } else {
+                                                sp.play(baby_cry, 1, 1, 0, -1, 1);
+                                        }}
+
+
+                                        new Thread(new Runnable() {
                                                    @Override
                                                    public void run() {
                                                            RefObjs.start_of_event = true;
@@ -1691,17 +1704,42 @@ public class CalibActivity extends AppCompatActivity {
                                            }).start();
 
                                         timer.start();
+                                        final int temp = ctr;
+
+
+                                        runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                        if(temp == 0){
+                                                                sw.setImageResource(R.drawable.calibration_message);
+                                                        }else{
+                                                        sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));}
+                                                }
+                                        });
 
                                         try {
-                                                Thread.sleep(10000); // Waits for 1 second (1000 milliseconds)
+                                                Thread.sleep(6000); // Waits for 1 second (1000 milliseconds)
                                         } catch (InterruptedException e) {
                                                 e.printStackTrace();
                                         }
-                                        final int temp = ctr;
+
+                                        runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                        sw.setImageBitmap(null);
+                                                }
+                                        });
+                                        try {
+                                                Thread.sleep(5000); // Waits for 1 second (1000 milliseconds)
+                                        } catch (InterruptedException e) {
+                                                e.printStackTrace();
+                                        }
+
                                         new  Thread(new Runnable() {
                                                 @Override
                                                 public void run() {
                                                         RefObjs.start_of_event = false;
+
                                                         try {
                                                                 RefObjs.register_event(weakActivity,temp<(number_images/2),switch_state);
                                                         } catch (IOException e) {
@@ -1718,21 +1756,7 @@ public class CalibActivity extends AppCompatActivity {
 //                                                e.printStackTrace();
 //                                        }
 
-                                        runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                        sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));}
-                                                });
-                                        if (Arrays.asList(urls_aversion).contains(url[ctr])) {
-                                                emotion_val = false;
-                                        } else {
-                                                emotion_val = true;
-                                        }
-                                if (emotion_val) {
-                                        sp.play(baby_laugh, 1, 1, 0, -1, 1);
-                                } else {
-                                        sp.play(baby_cry, 1, 1, 0, -1, 1);
-                                }
+                               sp.autoPause();
 
                                 ctr++;}
 
@@ -1777,6 +1801,7 @@ public class CalibActivity extends AppCompatActivity {
                                 file2 = new File(dir_str, fname2);
                                 fpath2 = file2.toString();
                                 String[] training1 = {fpath1, fpath2};
+                                Log.d("Trianing1",fpath2);
 
                                 fname1 = "svminput.scale";
                                 file1 = new File(dir_str, fname1);
@@ -1798,7 +1823,7 @@ public class CalibActivity extends AppCompatActivity {
                                 fname3 = "svminput.out";
                                 file3 = new File(dir_str, fname3);
                                 fpath3 = file3.toString();
-                                String[] testing1 = {fpath1, fpath2, fpath3};
+                                String[] testing1 = {fpath1, fpath2, fpath3, dir_str};
 
                                 fname1 = "svminput.t.scale";
                                 file1 = new File(dir_str, fname1);
@@ -1811,9 +1836,9 @@ public class CalibActivity extends AppCompatActivity {
                                 fname3 = "svminput.scale.out";
                                 file3 = new File(dir_str, fname3);
                                 fpath3 = file3.toString();
-                                String[] testing2 = {fpath1, fpath2, fpath3};
+                                String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
                                 timer.start();
-                                /*try {
+                                try {
                                         svm_scale.main(scaling1);
                                 } catch(IOException e) {
                                         e.printStackTrace();
@@ -1822,7 +1847,7 @@ public class CalibActivity extends AppCompatActivity {
                                         svm_scale.main(scaling2);
                                 } catch (IOException e) {
                                         e.printStackTrace();
-                                }*/
+                                }
                                 try {
                                         svm_train.main(training1);
                                 } catch (IOException e) {
