@@ -1798,7 +1798,7 @@ public class CalibActivity extends AppCompatActivity {
                                 fname3 = "svminput.out";
                                 file3 = new File(dir_str, fname3);
                                 fpath3 = file3.toString();
-                                String[] testing1 = {fpath1, fpath2, fpath3};
+                                String[] testing1 = {fpath1, fpath2, fpath3, dir_str};
 
                                 fname1 = "svminput.t.scale";
                                 file1 = new File(dir_str, fname1);
@@ -1811,9 +1811,10 @@ public class CalibActivity extends AppCompatActivity {
                                 fname3 = "svminput.scale.out";
                                 file3 = new File(dir_str, fname3);
                                 fpath3 = file3.toString();
-                                String[] testing2 = {fpath1, fpath2, fpath3};
+
+                                String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
                                 timer.start();
-                                /*try {
+                                try {
                                         svm_scale.main(scaling1);
                                 } catch(IOException e) {
                                         e.printStackTrace();
@@ -1822,7 +1823,7 @@ public class CalibActivity extends AppCompatActivity {
                                         svm_scale.main(scaling2);
                                 } catch (IOException e) {
                                         e.printStackTrace();
-                                }*/
+                                }
                                 try {
                                         svm_train.main(training1);
                                 } catch (IOException e) {
