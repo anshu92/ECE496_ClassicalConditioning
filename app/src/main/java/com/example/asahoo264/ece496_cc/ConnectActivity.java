@@ -7,6 +7,7 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Environment;
 import android.os.Parcelable;
 import android.support.v4.content.LocalBroadcastManager;
@@ -110,6 +111,9 @@ public class ConnectActivity extends Activity implements OnClickListener{
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-event-name"));
+
+        LocalBroadcastManager.getInstance(this).registerReceiver(mElectrodeReceiver,
+                new IntentFilter("horseshoe_event"));
 
 
     }
@@ -245,6 +249,67 @@ public class ConnectActivity extends Activity implements OnClickListener{
     };
 
 
+    private BroadcastReceiver mElectrodeReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+
+            final ArrayList<Double> vals = (ArrayList<Double>)intent.getSerializableExtra("horseshoe");
+            Activity activity = weakActivity.get();
+            // UI thread is used here only because we need to update
+            // TextView values. You don't have to use another thread, unless
+            // you want to run disconnect() or connect() from connection packet
+            // handler. In this case creating another thread is required.
+            if (activity != null) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView left = (TextView) findViewById(R.id.left_electrode);
+                        TextView lc = (TextView) findViewById(R.id.lc_electrode);
+                        TextView rc = (TextView) findViewById(R.id.rc_electrode);
+                        TextView right = (TextView) findViewById(R.id.right_electrode);
+
+                            if (vals.get(0) == 1) {
+                                left.setBackgroundColor(Color.GREEN);
+                            } else if (vals.get(0) == 2) {
+                                left.setBackgroundColor(Color.BLUE);
+                            } else{
+                                left.setBackgroundColor(Color.RED);
+                            }
+
+                        if (vals.get(1) == 1) {
+                            lc.setBackgroundColor(Color.GREEN);
+                        } else if (vals.get(1) == 2) {
+                            lc.setBackgroundColor(Color.BLUE);
+                        } else{
+                            lc.setBackgroundColor(Color.RED);
+                        }
+
+                        if (vals.get(2) == 1) {
+                            rc.setBackgroundColor(Color.GREEN);
+                        } else if (vals.get(2) == 2) {
+                            rc.setBackgroundColor(Color.BLUE);
+                        } else{
+                            rc.setBackgroundColor(Color.RED);
+                        }
+
+                        if (vals.get(3) == 1) {
+                            right.setBackgroundColor(Color.GREEN);
+                        } else if (vals.get(3) == 2) {
+                            right.setBackgroundColor(Color.BLUE);
+                        } else{
+                            right.setBackgroundColor(Color.RED);
+                        }
+
+
+
+
+                    }
+                });
+            }
+
+        }
+    };
 
 
     @Override
@@ -269,6 +334,8 @@ public class ConnectActivity extends Activity implements OnClickListener{
                 MuseDataPacketType.GAMMA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
                 MuseDataPacketType.THETA_RELATIVE);
+        RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
+                MuseDataPacketType.HORSESHOE);
         RefObjs.muse.setPreset(MusePreset.PRESET_14);
         RefObjs.muse.enableDataTransmission(true);
         RefObjs.muse.runAsynchronously();

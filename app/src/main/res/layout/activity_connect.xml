@@ -69,6 +69,7 @@
                 android:layout_height="40dp"
                 android:text="@string/disconnect"
                 tools:ignore="ButtonStyle" />
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
@@ -93,26 +94,73 @@
                 android:textSize="16sp"
                 android:textStyle="bold"/>
         </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingTop="15dp">
+
+                <TextView
+                    android:id="@+id/horseshoe"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="ELECTRODES: TP9, Fp1, Fp2, TP10"
+                    android:textSize="16sp"
+                    android:textStyle="bold"/>
+            </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:weightSum="4">
+
             <TextView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/left_electrode"
                 android:layout_weight="1"
-                android:text="@string/version"
-                android:textSize="16sp"
-                android:textStyle="italic"/>
+                android:padding="10dp"
+                android:text="LEFT"
+                android:textSize="12sp"
+                android:textAlignment="center"
+                android:background="@drawable/horseshoe_bg"
+                android:textStyle="bold"/>
             <TextView
-                android:id="@+id/version"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:id="@+id/lc_electrode"
                 android:layout_weight="1"
-                android:text="@string/undefined"
-                android:textSize="16sp"
-                android:textStyle="italic"/>
+                android:text="LEFT-CENTER"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:background="@drawable/horseshoe_bg"
+                android:textAlignment="center"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/rc_electrode"
+                android:layout_weight="1"
+                android:text="RIGHT-CENTER"
+                android:textSize="10sp"
+                android:padding="10dp"
+                android:background="@drawable/horseshoe_bg"
+                android:textAlignment="center"
+                android:textStyle="bold"/>
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/right_electrode"
+                android:layout_weight="1"
+                android:text="RIGHT"
+                android:textSize="12sp"
+                android:padding="10dp"
+                android:background="@drawable/horseshoe_bg"
+                android:textAlignment="center"
+                android:textStyle="bold"/>
 
         </LinearLayout>
+
         </LinearLayout>
         <LinearLayout
             android:layout_width="match_parent"

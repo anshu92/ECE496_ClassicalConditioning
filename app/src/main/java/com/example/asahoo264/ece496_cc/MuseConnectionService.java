@@ -268,7 +268,9 @@ public class MuseConnectionService extends IntentService {
                             }
                         }).start();
                         break;
-
+                    case HORSESHOE:
+                        sendElectrodeStatus(temp.getValues());
+                        break;
                     default:
                         break;
                 }
@@ -297,7 +299,13 @@ public class MuseConnectionService extends IntentService {
         LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
     }
 
-
+    private void sendElectrodeStatus(ArrayList<Double> vals) {
+        Log.d("sender", "Broadcasting message");
+        Intent intent = new Intent("horseshoe_event");
+        // You can also include some extra data.
+        intent.putExtra("horseshoe", vals);
+        LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
+    }
 
 
 
