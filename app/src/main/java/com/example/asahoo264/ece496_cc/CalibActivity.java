@@ -30,6 +30,7 @@ import android.util.Log;
 import android.util.LruCache;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -1541,7 +1542,8 @@ public class CalibActivity extends AppCompatActivity {
     private int max_imageid = 730;
     private int min_imageid = 0;
     private int currentIndex=-1;
-    private Switch seekBar;
+        private ImageButton happybutton;
+        private ImageButton sadbutton;
     private TextView textView;
     private TextView timertext;
     private CalibCountDownTimer timer;
@@ -1587,7 +1589,8 @@ public class CalibActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calib);
         sw = (ImageView) findViewById(R.id.imageSwitcher);
-        seekBar = (Switch)findViewById(R.id.switchbar);
+        happybutton = (ImageButton)findViewById(R.id.imageButton1);
+        sadbutton = (ImageButton)findViewById(R.id.imageButton2);
         timertext = (TextView)findViewById(R.id.timer);
         timer = new CalibCountDownTimer(startTime,interval);
 
@@ -1669,213 +1672,228 @@ public class CalibActivity extends AppCompatActivity {
 
 
 
-        seekBar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
 
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView,
-                                             boolean isChecked) {
+                happybutton.setOnClickListener(new View.OnClickListener() {
 
-                        switch_state = isChecked;
-                }
-        });
-
-
-
-                Runnable myRunnable = new Runnable() {
                         @Override
-                        public void run() {
-                                counter =  1;
-                                while (ctr < number_images) {
+                        public void onClick(View arg0) {
 
-                                        if (Arrays.asList(urls_aversion).contains(url[ctr])) {
-                                                emotion_val = false;
-                                        } else {
-                                                emotion_val = true;
-                                        }
-                                        if(ctr != 0){
-                                        if (emotion_val) {
-                                                sp.play(baby_laugh, 1, 1, 0, -1, 1);
-                                        } else {
-                                                sp.play(baby_cry, 1, 1, 0, -1, 1);
-                                        }}
+                               switch_state = false;
+                                happybutton.setBackgroundColor(Color.RED);
+                                sadbutton.setBackgroundResource(0);
 
+                        }});
+                sadbutton.setOnClickListener(new View.OnClickListener() {
 
-                                        new Thread(new Runnable() {
-                                                   @Override
-                                                   public void run() {
-                                                           RefObjs.start_of_event = true;
-                                                   }
-                                           }).start();
+                        @Override
+                        public void onClick(View arg0) {
 
-                                        timer.start();
-                                        final int temp = ctr;
+                                switch_state = true;
+                                sadbutton.setBackgroundColor(Color.RED);
+                                happybutton.setBackgroundResource(0);
+
+                        }});
 
 
-                                        runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                        if(temp == 0){
-                                                                sw.setImageResource(R.drawable.calibration_message);
-                                                        }else{
-                                                        sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));}
+                        Runnable myRunnable = new Runnable() {
+                                @Override
+                                public void run() {
+                                        counter = 1;
+                                        while (ctr < number_images) {
+
+                                                if (Arrays.asList(urls_aversion).contains(url[ctr])) {
+                                                        emotion_val = false;
+                                                } else {
+                                                        emotion_val = true;
                                                 }
-                                        });
-
-                                        try {
-                                                Thread.sleep(6000); // Waits for 1 second (1000 milliseconds)
-                                        } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                        }
-
-                                        runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                        sw.setImageBitmap(null);
-                                                }
-                                        });
-                                        try {
-                                                Thread.sleep(5000); // Waits for 1 second (1000 milliseconds)
-                                        } catch (InterruptedException e) {
-                                                e.printStackTrace();
-                                        }
-
-                                        new  Thread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                        RefObjs.start_of_event = false;
-
-                                                        try {
-                                                                RefObjs.register_event(weakActivity,temp<(number_images/2),switch_state);
-                                                        } catch (IOException e) {
-                                                                e.printStackTrace();
+                                                if (ctr != 0) {
+                                                        if (emotion_val) {
+                                                                sp.play(baby_laugh, 1, 1, 0, -1, 1);
+                                                        } else {
+                                                                sp.play(baby_cry, 1, 1, 0, -1, 1);
                                                         }
-
                                                 }
-                                        }).start();
 
 
-                                        //                                        try {
+                                                new Thread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                                RefObjs.start_of_event = true;
+                                                        }
+                                                }).start();
+
+                                                timer.start();
+                                                final int temp = ctr;
+
+
+                                                runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                                if (temp == 0) {
+                                                                        sw.setImageResource(R.drawable.calibration_message);
+                                                                } else {
+                                                                        sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));
+                                                                }
+                                                        }
+                                                });
+
+                                                try {
+                                                        Thread.sleep(6000); // Waits for 1 second (1000 milliseconds)
+                                                } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                }
+
+                                                runOnUiThread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                                sw.setImageBitmap(null);
+                                                        }
+                                                });
+                                                try {
+                                                        Thread.sleep(5000); // Waits for 1 second (1000 milliseconds)
+                                                } catch (InterruptedException e) {
+                                                        e.printStackTrace();
+                                                }
+
+                                                new Thread(new Runnable() {
+                                                        @Override
+                                                        public void run() {
+                                                                RefObjs.start_of_event = false;
+
+                                                                try {
+                                                                        RefObjs.register_event(weakActivity, temp < (number_images / 2), switch_state);
+                                                                } catch (IOException e) {
+                                                                        e.printStackTrace();
+                                                                }
+
+                                                        }
+                                                }).start();
+
+
+                                                //                                        try {
 //                                                RefObjs.register_event(ctr>(number_images/2),switch_state);
 //                                        } catch (IOException e) {
 //                                                e.printStackTrace();
 //                                        }
 
-                               sp.autoPause();
+                                                sp.autoPause();
 
-                                ctr++;}
+                                                ctr++;
+                                        }
 
-                                new Runnable() {
-                                        @Override
-                                        public void run() {
-                                                timertext.setText("CALIBRATION DONE");
-                                        }};
+                                        new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                        timertext.setText("CALIBRATION DONE");
+                                                }
+                                        };
 
-                                String fname1 = "range1";
-                                File file1 = new File(dir_str, fname1);
-                                String fpath1 = file1.toString();
+                                        String fname1 = "range1";
+                                        File file1 = new File(dir_str, fname1);
+                                        String fpath1 = file1.toString();
 
-                                String fname2 = "svminput";
-                                File file2 = new File(dir_str, fname2);
-                                String fpath2 = file2.toString();
+                                        String fname2 = "svminput";
+                                        File file2 = new File(dir_str, fname2);
+                                        String fpath2 = file2.toString();
 
-                                String fname3 = "svminput.scale";
-                                File file3 = new File(dir_str, fname3);
-                                String fpath3 = file3.toString();
-                                //ConnectActivity.start_recording = false;
-                                String[] scaling1 = {"-l", "-1", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
+                                        String fname3 = "svminput.scale";
+                                        File file3 = new File(dir_str, fname3);
+                                        String fpath3 = file3.toString();
+                                        //ConnectActivity.start_recording = false;
+                                        String[] scaling1 = {"-l", "-1", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
 
-                                fname1 = "range1";
-                                file1 = new File(dir_str, fname1);
-                                fpath1 = file1.toString();
+                                        fname1 = "range1";
+                                        file1 = new File(dir_str, fname1);
+                                        fpath1 = file1.toString();
 
-                                fname2 = "svminput.t";
-                                file2 = new File(dir_str, fname2);
-                                fpath2 = file2.toString();
+                                        fname2 = "svminput.t";
+                                        file2 = new File(dir_str, fname2);
+                                        fpath2 = file2.toString();
 
-                                fname3 = "svminput.t.scale";
-                                file3 = new File(dir_str, fname3);
-                                fpath3 = file3.toString();
-                                String[] scaling2 = {"-r", fpath1, fpath2/*, ">"*/, fpath3};
+                                        fname3 = "svminput.t.scale";
+                                        file3 = new File(dir_str, fname3);
+                                        fpath3 = file3.toString();
+                                        String[] scaling2 = {"-r", fpath1, fpath2/*, ">"*/, fpath3};
 
-                                fname1 = "svminput";
-                                file1 = new File(dir_str, fname1);
-                                fpath1 = file1.toString();
+                                        fname1 = "svminput";
+                                        file1 = new File(dir_str, fname1);
+                                        fpath1 = file1.toString();
 
-                                fname2 = "svminput.model";
-                                file2 = new File(dir_str, fname2);
-                                fpath2 = file2.toString();
-                                String[] training1 = {fpath1, fpath2};
-                                Log.d("Trianing1",fpath2);
+                                        fname2 = "svminput.model";
+                                        file2 = new File(dir_str, fname2);
+                                        fpath2 = file2.toString();
+                                        String[] training1 = {fpath1, fpath2};
+                                        Log.d("Trianing1", fpath2);
 
-                                fname1 = "svminput.scale";
-                                file1 = new File(dir_str, fname1);
-                                fpath1 = file1.toString();
+                                        fname1 = "svminput.scale";
+                                        file1 = new File(dir_str, fname1);
+                                        fpath1 = file1.toString();
 
-                                fname2 = "svminput.scale.model";
-                                file2 = new File(dir_str, fname2);
-                                fpath2 = file2.toString();
-                                String[] training2 = {fpath1, fpath2};
+                                        fname2 = "svminput.scale.model";
+                                        file2 = new File(dir_str, fname2);
+                                        fpath2 = file2.toString();
+                                        String[] training2 = {fpath1, fpath2};
 
-                                fname1 = "svminput.t";
-                                file1 = new File(dir_str, fname1);
-                                fpath1 = file1.toString();
+                                        fname1 = "svminput.t";
+                                        file1 = new File(dir_str, fname1);
+                                        fpath1 = file1.toString();
 
-                                fname2 = "svminput.model";
-                                file2 = new File(dir_str, fname2);
-                                fpath2 = file2.toString();
+                                        fname2 = "svminput.model";
+                                        file2 = new File(dir_str, fname2);
+                                        fpath2 = file2.toString();
 
-                                fname3 = "svminput.out";
-                                file3 = new File(dir_str, fname3);
-                                fpath3 = file3.toString();
-                                String[] testing1 = {fpath1, fpath2, fpath3, dir_str};
+                                        fname3 = "svminput.out";
+                                        file3 = new File(dir_str, fname3);
+                                        fpath3 = file3.toString();
+                                        String[] testing1 = {fpath1, fpath2, fpath3, dir_str};
 
-                                fname1 = "svminput.t.scale";
-                                file1 = new File(dir_str, fname1);
-                                fpath1 = file1.toString();
+                                        fname1 = "svminput.t.scale";
+                                        file1 = new File(dir_str, fname1);
+                                        fpath1 = file1.toString();
 
-                                fname2 = "svminput.scale.model";
-                                file2 = new File(dir_str, fname2);
-                                fpath2 = file2.toString();
+                                        fname2 = "svminput.scale.model";
+                                        file2 = new File(dir_str, fname2);
+                                        fpath2 = file2.toString();
 
-                                fname3 = "svminput.scale.out";
-                                file3 = new File(dir_str, fname3);
-                                fpath3 = file3.toString();
+                                        fname3 = "svminput.scale.out";
+                                        file3 = new File(dir_str, fname3);
+                                        fpath3 = file3.toString();
 
-                                String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
-                                timer.start();
-                                try {
-                                        svm_scale.main(scaling1);
-                                } catch(IOException e) {
-                                        e.printStackTrace();
+                                        String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
+                                        timer.start();
+                                        try {
+                                                svm_scale.main(scaling1);
+                                        } catch (IOException e) {
+                                                e.printStackTrace();
+                                        }
+                                        try {
+                                                svm_scale.main(scaling2);
+                                        } catch (IOException e) {
+                                                e.printStackTrace();
+                                        }
+                                        try {
+                                                svm_train.main(training1);
+                                        } catch (IOException e) {
+                                                e.printStackTrace();
+                                        }
+                                        try {
+                                                svm_predict.main(testing1);
+                                        } catch (IOException e) {
+                                                e.printStackTrace();
+                                        }
+                                        alert = true;
                                 }
-                                try {
-                                        svm_scale.main(scaling2);
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
-                                try {
-                                        svm_train.main(training1);
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
-                                try {
-                                        svm_predict.main(testing1);
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
-                                alert = true;
-                        }
 
                         };
 
-                                Thread myThread = new Thread(myRunnable);
-                myThread.start();
-             
-
-    }
+                        Thread myThread = new Thread(myRunnable);
+                        myThread.start();
 
 
-    public class CalibCountDownTimer extends CountDownTimer
+                }
+
+
+                public class CalibCountDownTimer extends CountDownTimer
     {
 
         public CalibCountDownTimer(long startTime, long interval)
