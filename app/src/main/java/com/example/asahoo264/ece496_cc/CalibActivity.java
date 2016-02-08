@@ -1750,7 +1750,7 @@ public class CalibActivity extends AppCompatActivity {
                                                         RefObjs.start_of_event = false;
 
                                                         try {
-                                                                RefObjs.register_event(weakActivity,temp<(number_images*0.9),switch_state);
+                                                                RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();
                                                         }
