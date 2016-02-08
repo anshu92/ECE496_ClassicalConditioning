@@ -37,6 +37,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import android.widget.ViewSwitcher;
 
+import com.interaxon.libmuse.ConnectionState;
 import com.interaxon.libmuse.MuseDataListener;
 import com.squareup.picasso.Picasso;
 
@@ -1537,6 +1538,7 @@ public class CalibActivity extends AppCompatActivity {
     };
 
     private static String dir_str = null;
+    private boolean disconnected = false;
 
     private int max_imageid = 730;
     private int min_imageid = 0;
@@ -1557,7 +1559,7 @@ public class CalibActivity extends AppCompatActivity {
         private int happy_counter = 0;
     private int aversion_counter = 0;
     private boolean is_train = true;
-    private int number_images = 10;
+    private int number_images = 50;
     private boolean switch_state = false;
         long test = 0;
     /** soundId for Later handling of sound pool **/
@@ -1598,6 +1600,8 @@ public class CalibActivity extends AppCompatActivity {
                 LocalBroadcastManager.getInstance(this).registerReceiver(mElectrodeReceiver,
                         new IntentFilter("horseshoe_event"));
 
+                LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+                    new IntentFilter("custom-event-name"));
                 //   mServiceIntent = new Intent(getApplicationContext(), MuseConnectionService.class);
                // mServiceIntent.setAction("getref");
                // startService(mServiceIntent);
@@ -1606,7 +1610,7 @@ public class CalibActivity extends AppCompatActivity {
                 final int maxMemory = (int) (Runtime.getRuntime().maxMemory() / 1024);
 
                 // Use 1/8th of the available memory for this memory cache.
-                final int cacheSize = maxMemory / 8;
+                final int cacheSize = maxMemory / 2;
 
                 mMemoryCache = new LruCache<String, Bitmap>(cacheSize) {
                         @Override
@@ -1745,7 +1749,7 @@ public class CalibActivity extends AppCompatActivity {
                                                         RefObjs.start_of_event = false;
 
                                                         try {
-                                                                RefObjs.register_event(weakActivity,temp<(number_images/2),switch_state);
+                                                                RefObjs.register_event(weakActivity,temp<(number_images*0.9),switch_state);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();
                                                         }
@@ -1782,7 +1786,7 @@ public class CalibActivity extends AppCompatActivity {
                                 File file3 = new File(dir_str, fname3);
                                 String fpath3 = file3.toString();
                                 //ConnectActivity.start_recording = false;
-                                String[] scaling1 = {"-l", "-1", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
+                                String[] scaling1 = {"-l", "0", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
 
                                 fname1 = "range1";
                                 file1 = new File(dir_str, fname1);
@@ -1854,12 +1858,12 @@ public class CalibActivity extends AppCompatActivity {
                                         e.printStackTrace();
                                 }
                                 try {
-                                        svm_train.main(training1);
+                                        svm_train.main(training2);
                                 } catch (IOException e) {
                                         e.printStackTrace();
                                 }
                                 try {
-                                        svm_predict.main(testing1);
+                                        svm_predict.main(testing2);
                                 } catch (IOException e) {
                                         e.printStackTrace();
                                 }
@@ -2020,6 +2024,7 @@ public class CalibActivity extends AppCompatActivity {
                         // Get extra data included in the Intent
 
                         final ArrayList<Double> vals = (ArrayList<Double>)intent.getSerializableExtra("horseshoe");
+
                         Activity activity = weakActivity.get();
                         // UI thread is used here only because we need to update
                         // TextView values. You don't have to use another thread, unless
@@ -2034,46 +2039,80 @@ public class CalibActivity extends AppCompatActivity {
                                                 TextView rc = (TextView) findViewById(R.id.rc_electrode);
                                                 TextView right = (TextView) findViewById(R.id.right_electrode);
 
-                                                if (vals.get(0) == 1) {
+                                                if(!disconnected) {
+                                                    if (vals.get(0) == 1) {
                                                         left.setBackgroundColor(Color.GREEN);
-                                                } else if (vals.get(0) == 2) {
+                                                    } else if (vals.get(0) == 2) {
                                                         left.setBackgroundColor(Color.BLUE);
-                                                } else{
+                                                    } else {
                                                         left.setBackgroundColor(Color.RED);
-                                                }
+                                                    }
 
-                                                if (vals.get(1) == 1) {
+                                                    if (vals.get(1) == 1) {
                                                         lc.setBackgroundColor(Color.GREEN);
-                                                } else if (vals.get(1) == 2) {
+                                                    } else if (vals.get(1) == 2) {
                                                         lc.setBackgroundColor(Color.BLUE);
-                                                } else{
+                                                    } else {
                                                         lc.setBackgroundColor(Color.RED);
-                                                }
+                                                    }
 
-                                                if (vals.get(2) == 1) {
+                                                    if (vals.get(2) == 1) {
                                                         rc.setBackgroundColor(Color.GREEN);
-                                                } else if (vals.get(2) == 2) {
+                                                    } else if (vals.get(2) == 2) {
                                                         rc.setBackgroundColor(Color.BLUE);
-                                                } else{
+                                                    } else {
                                                         rc.setBackgroundColor(Color.RED);
-                                                }
+                                                    }
 
-                                                if (vals.get(3) == 1) {
+                                                    if (vals.get(3) == 1) {
                                                         right.setBackgroundColor(Color.GREEN);
-                                                } else if (vals.get(3) == 2) {
+                                                    } else if (vals.get(3) == 2) {
                                                         right.setBackgroundColor(Color.BLUE);
-                                                } else{
+                                                    } else {
                                                         right.setBackgroundColor(Color.RED);
+                                                    }
+
                                                 }
-
-
-
-
                                         }
                                 });
                         }
 
                 }
         };
+
+    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            // Get extra data included in the Intent
+            final String message = intent.getStringExtra("message");
+
+            final CharSequence cs = "DISCONNECTED";
+            Activity activity = weakActivity.get();
+            // UI thread is used here only because we need to update
+            // TextView values. You don't have to use another thread, unless
+            // you want to run disconnect() or connect() from connection packet
+            // handler. In this case creating another thread is required.
+            if (activity != null) {
+                activity.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        TextView left = (TextView) findViewById(R.id.left_electrode);
+                        TextView lc = (TextView) findViewById(R.id.lc_electrode);
+                        TextView rc = (TextView) findViewById(R.id.rc_electrode);
+                        TextView right = (TextView) findViewById(R.id.right_electrode);
+
+                        if (message.contains(cs)) {
+                            left.setBackgroundColor(Color.RED);
+                            lc.setBackgroundColor(Color.RED);
+                            rc.setBackgroundColor(Color.RED);
+                            right.setBackgroundColor(Color.RED);
+                            disconnected = true;
+                        }
+
+                    }
+                });
+            }
+        }
+    };
 
 }

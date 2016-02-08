@@ -250,6 +250,12 @@
                 android:textStyle="italic"/>
 
         </LinearLayout>
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="back"
+                android:id="@+id/back" />
         </LinearLayout>
     </LinearLayout>
 

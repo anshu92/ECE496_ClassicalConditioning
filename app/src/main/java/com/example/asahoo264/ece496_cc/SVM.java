@@ -1,5 +1,7 @@
 package com.example.asahoo264.ece496_cc;
 
+import android.util.Log;
+
 import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -563,6 +565,8 @@ class svm_scale
         if(output!=null){
             try {
                 output.writeBytes(value + " ");
+                String val = Double.toString(value);
+                Log.d("Scaling output target: ", val);
             }
             catch (Exception e) {
                 System.err.println("can't open output file ");
@@ -593,6 +597,8 @@ class svm_scale
             if(output!=null){
                 try {
                     output.writeBytes(index + ":" + value + " ");
+                    String val = Double.toString(index)+ ":" + Double.toString(value) + " ";
+                    Log.d("Scaling output: ", val);
                 }
                 catch (Exception e) {
                     System.err.println("can't open output file ");
@@ -881,7 +887,7 @@ class svm_scale
                     "WARNING: original #nonzeros " + num_nonzeros+"\n"
                             +"         new      #nonzeros " + new_num_nonzeros+"\n"
                             +"Use -l 0 if many original feature values are zeros\n");
-
+        output.close();
         fp.close();
     }
 

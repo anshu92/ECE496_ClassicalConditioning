@@ -292,7 +292,7 @@ public class MuseConnectionService extends IntentService {
     }
 
     private void sendMessage(String status) {
-        Log.d("sender", "Broadcasting message");
+        //Log.d("sender", "Broadcasting message");
         Intent intent = new Intent("custom-event-name");
         // You can also include some extra data.
         intent.putExtra("message", status);
@@ -300,7 +300,7 @@ public class MuseConnectionService extends IntentService {
     }
 
     private void sendElectrodeStatus(ArrayList<Double> vals) {
-        Log.d("sender", "Broadcasting message");
+        //Log.d("sender", "Broadcasting message");
         Intent intent = new Intent("horseshoe_event");
         // You can also include some extra data.
         intent.putExtra("horseshoe", vals);

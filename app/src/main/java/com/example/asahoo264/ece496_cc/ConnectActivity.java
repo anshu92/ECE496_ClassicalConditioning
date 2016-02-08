@@ -99,15 +99,16 @@ public class ConnectActivity extends Activity implements OnClickListener{
         mServiceIntent.setAction("setup");
         startService(mServiceIntent);
 
-                Button disconnectbutton, connectbutton, refreshbutton;
+                Button disconnectbutton, connectbutton, refreshbutton, backbutton;
 
         disconnectbutton = (Button) findViewById(R.id.disconnect);
         connectbutton = (Button) findViewById(R.id.connect);
         refreshbutton = (Button) findViewById(R.id.refresh);
+        backbutton = (Button) findViewById(R.id.back);
         disconnectbutton.setOnClickListener(this);
         connectbutton.setOnClickListener(this);
         refreshbutton.setOnClickListener(this);
-
+        backbutton.setOnClickListener(this);
 
         LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                 new IntentFilter("custom-event-name"));
@@ -136,6 +137,13 @@ public class ConnectActivity extends Activity implements OnClickListener{
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        this, android.R.layout.simple_spinner_item, spinnerItems);
             adapterArray_status = adapterArray;
             musesSpinner.setAdapter(adapterArray);
+        }
+        else if(v.getId() == R.id.back){
+            //this.moveTaskToBack(true);
+            //finish();
+            Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(intent);
         }
         else if (v.getId() == R.id.connect) {
             List<Muse> pairedMuses = MuseManager.getPairedMuses();

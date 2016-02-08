@@ -199,7 +199,8 @@ public class RefObjs extends Application{
         if (!file.exists()) {
             file.createNewFile();
         }
-
+        if(alpha_var==0 && beta_var==0 && gamma_var==0 && theta_var==0)
+            return;
         try {
             fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
 
@@ -291,6 +292,7 @@ public class RefObjs extends Application{
         if (!file.exists()) {
             file.createNewFile();
         }
+
         try {
             fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
             //Toast.makeText(this, fcontent, Toast.LENGTH_SHORT).show();
