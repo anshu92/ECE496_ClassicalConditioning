@@ -235,12 +235,7 @@ public class MuseConnectionService extends IntentService {
                             @Override
                             public void run() {
                                 RefObjs.updateAlphaRelative(temp.getValues());
-                                Double n = RefObjs.average(temp.getValues());
-                                if(!n.isNaN()){
-                                    PlotActivity.alpha_curr.add(n);}
-                                if(PlotActivity.alpha_curr.size() > 30){
-                                    PlotActivity.alpha_curr.clear();
-                                }
+
                             }
                         }).start();
 
@@ -251,7 +246,6 @@ public class MuseConnectionService extends IntentService {
                             @Override
                             public void run() {
                                 RefObjs.updateBetaRelative(temp.getValues());
-
 
                             }
                         }).start();
@@ -306,7 +300,7 @@ public class MuseConnectionService extends IntentService {
     }
 
     private void sendElectrodeStatus(ArrayList<Double> vals) {
-        //Log.d("sender", "Broadcasting message");
+        Log.d("sender", "Broadcasting message");
         Intent intent = new Intent("horseshoe_event");
         // You can also include some extra data.
         intent.putExtra("horseshoe", vals);

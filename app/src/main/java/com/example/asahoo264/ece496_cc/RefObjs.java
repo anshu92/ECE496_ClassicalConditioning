@@ -34,7 +34,6 @@ public class RefObjs extends Application{
     public static ArrayList<Double> theta_val = new ArrayList<Double>();
 
 
-
     private static RefObjs singleton;
     public static Muse muse = null;
 
@@ -74,7 +73,6 @@ public class RefObjs extends Application{
 
     public static void updateAlphaRelative(final ArrayList<Double> data) {
         Double n = average(data);
-
       //Log.d("alpha: ", n.toString());
         if (start_of_event && n != null && !n.isNaN()) {
             alpha_val.add(n);
@@ -84,11 +82,6 @@ public class RefObjs extends Application{
 
     public static void updateBetaRelative(final ArrayList<Double> data) {
         Double n = average(data);
-        if(!n.isNaN()){
-            PlotActivity.beta_curr.add(n);}
-        if(PlotActivity.beta_curr.size() > 30){
-            PlotActivity.beta_curr.clear();
-        }
         if (start_of_event && n != null && !n.isNaN()) {
             beta_val.add(n);        }
 
@@ -96,11 +89,6 @@ public class RefObjs extends Application{
 
   public static void updateGammaRelative(final ArrayList<Double> data) {
       Double n = average(data);
-      if(!n.isNaN()){
-          PlotActivity.gamma_curr.add(n);}
-      if(PlotActivity.gamma_curr.size() > 1000){
-          PlotActivity.gamma_curr.clear();
-      }
       if (start_of_event && n != null && !n.isNaN()) {
             gamma_val.add(n);        }
 
@@ -108,11 +96,6 @@ public class RefObjs extends Application{
 
     public static void updateThetaRelative(final ArrayList<Double> data) {
         Double n = average(data);
-        if(!n.isNaN()){
-            PlotActivity.theta_curr.add(n);}
-        if(PlotActivity.theta_curr.size() > 1000){
-            PlotActivity.theta_curr.clear();
-        }
         if (start_of_event && n != null && !n.isNaN()) {
             theta_val.add(n);        }
 
@@ -355,7 +338,7 @@ public class RefObjs extends Application{
 
     }
 
-    public static Double average(ArrayList<Double> list) {
+    private static Double average(ArrayList<Double> list) {
         // 'average' is undefined if there are no elements in the list.
         if (list == null || list.isEmpty())
             return 0.0;

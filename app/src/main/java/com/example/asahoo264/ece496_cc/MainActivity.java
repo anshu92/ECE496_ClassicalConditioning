@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
 
         } else if (v.getId() == R.id.plotbutton) {
-            Intent i = new Intent(MainActivity.this, PlotActivity.class);
+            Intent i = new Intent(MainActivity.this, ConnectActivity.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         } else if (v.getId() == R.id.verifybutton) {
