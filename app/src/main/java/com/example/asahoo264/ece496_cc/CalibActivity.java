@@ -1539,7 +1539,7 @@ public class CalibActivity extends AppCompatActivity {
     };
 
     private static String dir_str = null;
-    private boolean disconnected = false;
+	private boolean disconnected = false;
 
     private int max_imageid = 730;
     private int min_imageid = 0;
@@ -1601,7 +1601,7 @@ public class CalibActivity extends AppCompatActivity {
                 LocalBroadcastManager.getInstance(this).registerReceiver(mElectrodeReceiver,
                         new IntentFilter("horseshoe_event"));
 
-                LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
+				LocalBroadcastManager.getInstance(this).registerReceiver(mMessageReceiver,
                     new IntentFilter("custom-event-name"));
                 //   mServiceIntent = new Intent(getApplicationContext(), MuseConnectionService.class);
                // mServiceIntent.setAction("getref");
@@ -2036,12 +2036,12 @@ public class CalibActivity extends AppCompatActivity {
                         // Get extra data included in the Intent
 
                         final ArrayList<Double> vals = (ArrayList<Double>)intent.getSerializableExtra("horseshoe");
-
                         Activity activity = weakActivity.get();
                         // UI thread is used here only because we need to update
                         // TextView values. You don't have to use another thread, unless
                         // you want to run disconnect() or connect() from connection packet
                         // handler. In this case creating another thread is required.
+						
                         if (activity != null) {
                                 activity.runOnUiThread(new Runnable() {
                                         @Override
@@ -2050,49 +2050,48 @@ public class CalibActivity extends AppCompatActivity {
                                                 TextView lc = (TextView) findViewById(R.id.lc_electrode);
                                                 TextView rc = (TextView) findViewById(R.id.rc_electrode);
                                                 TextView right = (TextView) findViewById(R.id.right_electrode);
-
-                                                if(!disconnected) {
-                                                    if (vals.get(0) == 1) {
+											if(!disconnected){
+                                                if (vals.get(0) == 1) {
                                                         left.setBackgroundColor(Color.GREEN);
-                                                    } else if (vals.get(0) == 2) {
+                                                } else if (vals.get(0) == 2) {
                                                         left.setBackgroundColor(Color.BLUE);
-                                                    } else {
+                                                } else{
                                                         left.setBackgroundColor(Color.RED);
-                                                    }
-
-                                                    if (vals.get(1) == 1) {
-                                                        lc.setBackgroundColor(Color.GREEN);
-                                                    } else if (vals.get(1) == 2) {
-                                                        lc.setBackgroundColor(Color.BLUE);
-                                                    } else {
-                                                        lc.setBackgroundColor(Color.RED);
-                                                    }
-
-                                                    if (vals.get(2) == 1) {
-                                                        rc.setBackgroundColor(Color.GREEN);
-                                                    } else if (vals.get(2) == 2) {
-                                                        rc.setBackgroundColor(Color.BLUE);
-                                                    } else {
-                                                        rc.setBackgroundColor(Color.RED);
-                                                    }
-
-                                                    if (vals.get(3) == 1) {
-                                                        right.setBackgroundColor(Color.GREEN);
-                                                    } else if (vals.get(3) == 2) {
-                                                        right.setBackgroundColor(Color.BLUE);
-                                                    } else {
-                                                        right.setBackgroundColor(Color.RED);
-                                                    }
-
                                                 }
+
+                                                if (vals.get(1) == 1) {
+                                                        lc.setBackgroundColor(Color.GREEN);
+                                                } else if (vals.get(1) == 2) {
+                                                        lc.setBackgroundColor(Color.BLUE);
+                                                } else{
+                                                        lc.setBackgroundColor(Color.RED);
+                                                }
+
+                                                if (vals.get(2) == 1) {
+                                                        rc.setBackgroundColor(Color.GREEN);
+                                                } else if (vals.get(2) == 2) {
+                                                        rc.setBackgroundColor(Color.BLUE);
+                                                } else{
+                                                        rc.setBackgroundColor(Color.RED);
+                                                }
+
+                                                if (vals.get(3) == 1) {
+                                                        right.setBackgroundColor(Color.GREEN);
+                                                } else if (vals.get(3) == 2) {
+                                                        right.setBackgroundColor(Color.BLUE);
+                                                } else{
+                                                        right.setBackgroundColor(Color.RED);
+                                                }
+											}
                                         }
                                 });
                         }
 
                 }
         };
-
-    private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
+		
+		
+		 private BroadcastReceiver mMessageReceiver = new BroadcastReceiver() {
         @Override
         public void onReceive(Context context, Intent intent) {
             // Get extra data included in the Intent
