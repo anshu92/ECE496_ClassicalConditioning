@@ -9,12 +9,12 @@
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
 
     <application
+        android:name=".RefObjs"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme"
-        android:name = ".RefObjs">
+        android:theme="@style/AppTheme">
         <activity
             android:name=".MainActivity"
             android:launchMode="singleInstance">
@@ -34,6 +34,8 @@
         <service
             android:name=".MuseConnectionService"
             android:exported="false" />
+
+        <activity android:name=".WristbandActivity"></activity>
     </application>
 
 </manifest>

@@ -16,18 +16,20 @@ import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button connectbutton, calibbutton, plotbutton, verifybutton;
+    Button connectbutton,connectbutton1, calibbutton, plotbutton, verifybutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         connectbutton = (Button) findViewById(R.id.connectbutton);
+        connectbutton1 = (Button) findViewById(R.id.connectbutton1);
         calibbutton = (Button) findViewById(R.id.calibbutton);
         plotbutton = (Button) findViewById(R.id.plotbutton);
         verifybutton = (Button) findViewById(R.id.verifybutton);
 
         connectbutton.setOnClickListener(this);
+        connectbutton1.setOnClickListener(this);
         calibbutton.setOnClickListener(this);
         plotbutton.setOnClickListener(this);
         verifybutton.setOnClickListener(this);
@@ -58,7 +60,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 
-        } else if (v.getId() == R.id.calibbutton) {
+        } else if (v.getId() == R.id.connectbutton1) {
+            Intent i = new Intent(MainActivity.this, WristbandActivity.class);
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+
+        }else if (v.getId() == R.id.calibbutton) {
             Intent i = new Intent(MainActivity.this, CalibActivity.class);
 
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

@@ -49,6 +49,7 @@ import java.io.InputStream;
 import java.io.OutputStreamWriter;
 import java.lang.ref.WeakReference;
 import java.net.URL;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Random;
@@ -1765,6 +1766,17 @@ public class CalibActivity extends AppCompatActivity {
 //                                        }
 
                                sp.autoPause();
+
+                                        String data;
+                                        if(switch_state){
+                                                data = "!C" + 1 + "1";
+                                        } else{
+                                                data = "!B" + 1 + "1";
+
+                                        }
+                                        ByteBuffer buffer = ByteBuffer.allocate(data.length()).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+                                        buffer.put(data.getBytes());
+                                        UartInterfaceActivity.sendDataWithCRC(buffer.array());
 
                                 ctr++;}
 
