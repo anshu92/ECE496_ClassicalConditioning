@@ -12,6 +12,7 @@
     <string name="scan_devicesheadertitle">PERIPHERALS</string>
     <string name="dialog_error_no_ble">Bluetooth Low Energy not supported</string>
     <string name="dialog_error_no_bluetooth">Bluetooth not available</string>
+    <string name="action_settings">Settings</string>
     <!-- Common -->
     <string name="dialog_ok">Ok</string>
     <string name="settingsaction_confirmenablewifi_title">Wifi status</string>

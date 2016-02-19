@@ -30,6 +30,7 @@ import android.util.Log;
 import android.util.LruCache;
 import android.view.View;
 import android.widget.CompoundButton;
+import android.widget.ImageButton;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
 import android.widget.Switch;
@@ -1544,7 +1545,6 @@ public class CalibActivity extends AppCompatActivity {
     private int max_imageid = 730;
     private int min_imageid = 0;
     private int currentIndex=-1;
-    private Switch seekBar;
     private TextView textView;
     private TextView timertext;
     private CalibCountDownTimer timer;
@@ -1582,7 +1582,7 @@ public class CalibActivity extends AppCompatActivity {
         private WeakReference<Activity> weakActivity;
 
 
-
+    private ImageButton happy, sad;
 
 
         @Override
@@ -1590,7 +1590,8 @@ public class CalibActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calib);
         sw = (ImageView) findViewById(R.id.imageSwitcher);
-        seekBar = (Switch)findViewById(R.id.switchbar);
+        happy = (ImageButton) findViewById(R.id.imageButton);
+            sad = (ImageButton) findViewById(R.id.imageButton2);
         timertext = (TextView)findViewById(R.id.timer);
         timer = new CalibCountDownTimer(startTime,interval);
 
@@ -1643,19 +1644,19 @@ public class CalibActivity extends AppCompatActivity {
                 }
 
                 runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
+                    @Override
+                    public void run() {
                         if (currentapiVersion < Build.VERSION_CODES.LOLLIPOP) {
-                                sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
+                            sp = new SoundPool(5, AudioManager.STREAM_MUSIC, 0);
 
-                        }else {
-                                SoundPool.Builder sp21 = new SoundPool.Builder();
-                                sp21.setAudioAttributes(new AudioAttributes.Builder()
-                                        .setUsage(AudioAttributes.USAGE_MEDIA)
-                                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                                        .build());
-                                sp21.setMaxStreams(2);
-                                sp = sp21.build();
+                        } else {
+                            SoundPool.Builder sp21 = new SoundPool.Builder();
+                            sp21.setAudioAttributes(new AudioAttributes.Builder()
+                                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                                    .build());
+                            sp21.setMaxStreams(2);
+                            sp = sp21.build();
                         }
 
 
@@ -1669,21 +1670,33 @@ public class CalibActivity extends AppCompatActivity {
                         loadBitmap(url, sw);
 
 
+                    }
+                });
+
+
+            happy.setOnClickListener(new View.OnClickListener() {
+                public void onClick(View v) {
+                    try {
+                        switch_state = true;
+                        happy.setBackgroundColor(Color.GREEN);
+                        sad.setBackgroundColor(0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-        });
+            });
 
-
-
-        seekBar.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-
-                @Override
-                public void onCheckedChanged(CompoundButton buttonView,
-                                             boolean isChecked) {
-
-                        switch_state = isChecked;
+            sad.setOnClickListener(new View.OnClickListener()   {
+                public void onClick(View v)  {
+                    try {
+                        switch_state = false;
+                        sad.setBackgroundColor(Color.GREEN);
+                        happy.setBackgroundColor(0);
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
                 }
-        });
-
+            });
 
 
                 Runnable myRunnable = new Runnable() {

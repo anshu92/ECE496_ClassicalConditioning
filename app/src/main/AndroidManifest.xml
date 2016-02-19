@@ -7,6 +7,8 @@
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
 
     <application
         android:name=".RefObjs"
@@ -29,6 +31,18 @@
             android:launchMode="singleInstance" />
         <activity
             android:name=".CalibActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".Authentication"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".Handlers"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".LoginActivity"
+            android:launchMode="singleInstance" />
+        <activity
+            android:name=".SignupActivity"
             android:launchMode="singleInstance" />
 
         <service

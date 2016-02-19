@@ -80,20 +80,6 @@
     </LinearLayout>
 
 
-    <Switch
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:thumb="@drawable/apptheme_switch_inner_holo_light"
-        android:track="@drawable/apptheme_switch_track_holo_light"
-        android:textOn=""
-        android:textOff=""
-        android:textColor="#000000"
-        android:textStyle="bold"
-        android:id="@+id/switchbar" />
-
-
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -103,10 +89,37 @@
         android:id="@+id/frameLayout">
 
 
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_height="145dp"
+            android:layout_gravity="center_horizontal|bottom">
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButton"
+                    android:src="@drawable/happyicon" />
+            </LinearLayout>
 
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
 
-
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButton2"
+                    android:src="@drawable/sadicon" />
+            </LinearLayout>
+        </LinearLayout>
     </FrameLayout>
     </RelativeLayout>

@@ -140,10 +140,11 @@ public class ConnectActivity extends Activity implements OnClickListener{
         }
         else if(v.getId() == R.id.back){
             //this.moveTaskToBack(true);
+            moveTaskToBack(true);
             //finish();
-            Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(intent);
+            //Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
+            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            //startActivity(intent);
         }
         else if (v.getId() == R.id.connect) {
             List<Muse> pairedMuses = MuseManager.getPairedMuses();

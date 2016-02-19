@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button connectbutton,connectbutton1, calibbutton, plotbutton, verifybutton;
+    Button connectbutton,connectbutton1, authbutton, handlerbutton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,16 +24,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         setContentView(R.layout.activity_main);
         connectbutton = (Button) findViewById(R.id.connectbutton);
         connectbutton1 = (Button) findViewById(R.id.connectbutton1);
-        calibbutton = (Button) findViewById(R.id.calibbutton);
-        plotbutton = (Button) findViewById(R.id.plotbutton);
-        verifybutton = (Button) findViewById(R.id.verifybutton);
+        authbutton = (Button) findViewById(R.id.authbutton);
+        handlerbutton = (Button) findViewById(R.id.handlerbutton);
 
         connectbutton.setOnClickListener(this);
         connectbutton1.setOnClickListener(this);
-        calibbutton.setOnClickListener(this);
-        plotbutton.setOnClickListener(this);
-        verifybutton.setOnClickListener(this);
-
+        authbutton.setOnClickListener(this);
+        handlerbutton.setOnClickListener(this);
 
     }
 
@@ -65,19 +62,15 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 
-        }else if (v.getId() == R.id.calibbutton) {
-            Intent i = new Intent(MainActivity.this, CalibActivity.class);
+        }else if (v.getId() == R.id.authbutton) {
+            Intent i = new Intent(MainActivity.this, LoginActivity.class);
 
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 
 
-        } else if (v.getId() == R.id.plotbutton) {
-            Intent i = new Intent(MainActivity.this, ConnectActivity.class);
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-        } else if (v.getId() == R.id.verifybutton) {
-            Intent i = new Intent(MainActivity.this, ConnectActivity.class);
+        } else if (v.getId() == R.id.handlerbutton) {
+            Intent i = new Intent(MainActivity.this, Handlers.class);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
