@@ -1928,7 +1928,7 @@ public class CalibActivity extends AppCompatActivity {
             timertext.setText("Time's up!");
                 average_conc = 0;
 
-                if(average_conc < 50){
+                if(RefObjs.concentration*100 < 50){
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                 weakActivity.get());
 
@@ -1937,7 +1937,7 @@ public class CalibActivity extends AppCompatActivity {
 
                         // set dialog message
                         alertDialogBuilder
-                                .setMessage("PLEASE CONCENTRATE!")
+                                .setMessage("PLEASE CONCENTRATE! \npress back to dismiss")
                                 .setCancelable(true);
 
 
@@ -1947,6 +1947,8 @@ public class CalibActivity extends AppCompatActivity {
                         // show it
                         alertDialog.show();
 
+                }else{
+                        alertDialog.cancel();
                 }
 
                 if(alert){
@@ -1996,7 +1998,8 @@ public class CalibActivity extends AppCompatActivity {
                 }
                 timertext.setText(millisUntilFinished / 1000 + " secs");
                 timeElapsed = startTime - millisUntilFinished;
-                average_conc = (average_conc + RefObjs.concentration*100)/timeElapsed;
+                //average_conc = (average_conc + RefObjs.concentration*100)/(timeElapsed/1000);
+
 
         }
     }
