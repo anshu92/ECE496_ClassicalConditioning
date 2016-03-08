@@ -32,7 +32,7 @@ public class RefObjs extends Application{
     public static ArrayList<Double> beta_val = new ArrayList<Double>();
     public static ArrayList<Double> gamma_val = new ArrayList<Double>();
     public static ArrayList<Double> theta_val = new ArrayList<Double>();
-
+    public static Double concentration = 0.0;
 
     private static RefObjs singleton;
     public static Muse muse = null;
@@ -70,7 +70,11 @@ public class RefObjs extends Application{
        weakData = weakData;
     }
 
+    public static void updateConcentration(final ArrayList<Double> data){
+        Double n = data.get(0);
+        concentration = n;
 
+    }
     public static void updateAlphaRelative(final ArrayList<Double> data) {
         Double n = average(data);
       //Log.d("alpha: ", n.toString());

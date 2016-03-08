@@ -271,6 +271,15 @@ public class MuseConnectionService extends IntentService {
                     case HORSESHOE:
                         sendElectrodeStatus(temp.getValues());
                         break;
+                    case CONCENTRATION:
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RefObjs.updateConcentration(temp.getValues());
+
+                            }
+                        }).start();
+                        break;
                     default:
                         break;
                 }

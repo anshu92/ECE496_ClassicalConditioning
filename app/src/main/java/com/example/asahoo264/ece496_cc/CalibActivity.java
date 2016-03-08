@@ -1567,6 +1567,7 @@ public class CalibActivity extends AppCompatActivity {
     private int baby_cry;
     private int baby_laugh;
     private SoundPool sp;
+        private double average_conc = 0;
    // private LoadImage loader;
         private int loader;
         private Handler handler;
@@ -1583,6 +1584,7 @@ public class CalibActivity extends AppCompatActivity {
 
 
     private ImageButton happy, sad;
+       private AlertDialog alertDialog;
 
 
         @Override
@@ -1904,6 +1906,9 @@ public class CalibActivity extends AppCompatActivity {
     }
 
 
+    //COUNTDOWN TIMER
+
+
     public class CalibCountDownTimer extends CountDownTimer
     {
 
@@ -1916,6 +1921,28 @@ public class CalibActivity extends AppCompatActivity {
         public void onFinish()
         {
             timertext.setText("Time's up!");
+                average_conc = 0;
+
+                if(average_conc < 50){
+                        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
+                                weakActivity.get());
+
+                        // set title
+                        alertDialogBuilder.setTitle("CONCENTRATION LOW");
+
+                        // set dialog message
+                        alertDialogBuilder
+                                .setMessage("PLEASE CONCENTRATE!")
+                                .setCancelable(true);
+
+
+                        // create alert dialog
+                        alertDialog = alertDialogBuilder.create();
+
+                        // show it
+                        alertDialog.show();
+
+                }
 
                 if(alert){
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
@@ -1956,9 +1983,16 @@ public class CalibActivity extends AppCompatActivity {
                       //  sw.setImageDrawable(null);
             }
 
+                TextView conc = (TextView) findViewById(R.id.concentration);
+                conc.setText(String.format( "Concentration: %.1f", RefObjs.concentration*100 )+" %");
 
-            timertext.setText(millisUntilFinished / 1000 + " secs");
-            timeElapsed = startTime - millisUntilFinished;
+                if(RefObjs.concentration*100 > 50 && alertDialog != null){
+                        alertDialog.dismiss();
+                }
+                timertext.setText(millisUntilFinished / 1000 + " secs");
+                timeElapsed = startTime - millisUntilFinished;
+                average_conc = (average_conc + RefObjs.concentration*100)/timeElapsed;
+
         }
     }
 

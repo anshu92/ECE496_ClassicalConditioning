@@ -345,6 +345,8 @@ public class ConnectActivity extends Activity implements OnClickListener{
                 MuseDataPacketType.THETA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
                 MuseDataPacketType.HORSESHOE);
+        RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
+                MuseDataPacketType.CONCENTRATION);
         RefObjs.muse.setPreset(MusePreset.PRESET_14);
         RefObjs.muse.enableDataTransmission(true);
         RefObjs.muse.runAsynchronously();
