@@ -17,11 +17,16 @@ import android.widget.Button;
  */
 public class Handlers extends AppCompatActivity implements View.OnClickListener {
     Button calibbutton, plotbutton, verifybutton;
+    String name = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_handler);
+
+        Intent intent = getIntent();
+        name = intent.getStringExtra("Name");
+
         calibbutton = (Button) findViewById(R.id.calibbutton);
         plotbutton = (Button) findViewById(R.id.plotbutton);
         verifybutton = (Button) findViewById(R.id.verifybutton);
@@ -38,7 +43,8 @@ public class Handlers extends AppCompatActivity implements View.OnClickListener 
 
         if (v.getId() == R.id.calibbutton) {
             Intent i = new Intent(Handlers.this, CalibActivity.class);
-
+            i.putExtra("Name", name);
+            Log.d("In Handler. Name", name);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 

@@ -3,6 +3,7 @@ package com.example.asahoo264.ece496_cc;
 /**
  * Created by YanyanZ on 2/10/16.
  */
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.os.Bundle;
 import android.os.Environment;
@@ -32,7 +33,7 @@ import javax.crypto.spec.IvParameterSpec;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
-
+    Intent data = new Intent();
     Button _loginButton;
     EditText _nameText, _passwordText;
     TextView _signupLink;
@@ -117,7 +118,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                     if (user.equals(name)) {
                         if (pass.equals(encryptedData))
-                            onLoginSuccess();
+                            onLoginSuccess(name);
                         else
                             onLoginFailed();
                     }
@@ -158,8 +159,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         moveTaskToBack(true);
     }
 
-    public void onLoginSuccess() {
+    public void onLoginSuccess(String name) {
         _loginButton.setEnabled(true);
+        Bundle conData = new Bundle();
+        conData.putString("User: ", name);
+        data.putExtras(conData);
+        setResult(RESULT_OK, data);
+        if (getParent() == null) {
+            setResult(Activity.RESULT_OK, data);
+        } else {
+            getParent().setResult(Activity.RESULT_OK, data);
+        }
         finish();
     }
 

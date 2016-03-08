@@ -106,7 +106,8 @@ public class RefObjs extends Application{
     }
 
 
-    public static void register_event(final WeakReference<Activity> activityref, boolean is_train, boolean seekbar_progress) throws IOException {
+    public static void register_event(final WeakReference<Activity> activityref, boolean is_train, boolean seekbar_progress, String dir) throws IOException {
+        dir_str = dir;
         double alpha_sum = 0;
         double alpha_var_sum = 0;
         double alpha_mean;
@@ -151,8 +152,10 @@ public class RefObjs extends Application{
         double gamma_var_sum = 0;
         double gamma_mean;
         double gamma_var;
+        double[] gamma_data = new double[gamma_val.size()];
         for(int i = 0; i < gamma_val.size();i++){
             gamma_sum  =  gamma_sum +  gamma_val.get(i).doubleValue();
+            gamma_data[i] = gamma_val.get(i).doubleValue();
         }
         gamma_mean = gamma_sum/gamma_val.size();
         for(int i = 0; i < gamma_val.size();i++){
@@ -188,7 +191,7 @@ public class RefObjs extends Application{
         if(seekbar_progress)
             emotion_label = 1;
         else
-            emotion_label = 0;
+            emotion_label = -1;
 
         String fname;
         final String fcontent;
@@ -203,11 +206,12 @@ public class RefObjs extends Application{
         if (!file.exists()) {
             file.createNewFile();
         }
-        if(alpha_var==0 && beta_var==0 && gamma_var==0 && theta_var==0)
+        //if(alpha_var==0 && beta_var==0 && gamma_var==0 && theta_var==0)
+        if(gamma_data.length == 0 || (gamma_data[0]==0 && gamma_data[1]==0 && gamma_data[2]==0 && gamma_data[3]==0))
             return;
         try {
-            fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
-
+            //fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
+            fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(gamma_data[0]) + " 2:" + String.valueOf(gamma_data[1])  + " 3:" + String.valueOf(gamma_data[2]) + " 4:"  +  String.valueOf(gamma_data[3]) + "\n";
             Log.d("FCONTENT: ", fcontent);
             FileOutputStream fOut = new FileOutputStream(file,true);
             OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
@@ -289,7 +293,7 @@ public class RefObjs extends Application{
         if(emotion_val)
             emotion_label = 1;
         else
-            emotion_label = 0;
+            emotion_label = -1;
 
         File file = new File(dir_str, fname);
         // If file does not exists, then create it

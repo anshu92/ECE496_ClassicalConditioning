@@ -134,6 +134,17 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             myOutWriter.close();
             fOut.close();
 
+            File folder = new File(dir_str + File.separator + name);
+            boolean success = true;
+            if (!folder.exists()) {
+                success = folder.mkdir();
+            }
+            if (success) {
+                // Do something on success
+            } else {
+                onSignupFailed();
+                return;
+            }
 
 
         } catch (IOException e) {

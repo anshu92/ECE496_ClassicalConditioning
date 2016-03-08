@@ -59,7 +59,7 @@ import java.util.logging.Handler;
 import static android.os.Environment.isExternalStorageRemovable;
 
 public class CalibActivity extends AppCompatActivity {
-
+        String name = null;
     private ImageView sw;
     private final Random r = new Random();
     public static int id = 4;
@@ -1560,7 +1560,7 @@ public class CalibActivity extends AppCompatActivity {
         private int happy_counter = 0;
     private int aversion_counter = 0;
     private boolean is_train = true;
-    private int number_images = 50;
+    private int number_images = 20;
     private boolean switch_state = false;
         long test = 0;
     /** soundId for Later handling of sound pool **/
@@ -1591,14 +1591,19 @@ public class CalibActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_calib);
+
+                Intent intent = getIntent();
+                name = intent.getStringExtra("Name");
         sw = (ImageView) findViewById(R.id.imageSwitcher);
         happy = (ImageButton) findViewById(R.id.imageButton);
             sad = (ImageButton) findViewById(R.id.imageButton2);
         timertext = (TextView)findViewById(R.id.timer);
         timer = new CalibCountDownTimer(startTime,interval);
 
-            dir_str = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
-
+        dir_str = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
+        if(name!=null)
+            dir_str = dir_str + File.separator + name + File.separator;
+            Log.d("In Calib. Directory", dir_str);
                weakActivity = new WeakReference<Activity>(this);
 
                 LocalBroadcastManager.getInstance(this).registerReceiver(mElectrodeReceiver,
@@ -1765,7 +1770,7 @@ public class CalibActivity extends AppCompatActivity {
                                                         RefObjs.start_of_event = false;
 
                                                         try {
-                                                                RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state);
+                                                                RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state,dir_str);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();
                                                         }
@@ -1813,7 +1818,7 @@ public class CalibActivity extends AppCompatActivity {
                                 File file3 = new File(dir_str, fname3);
                                 String fpath3 = file3.toString();
                                 //ConnectActivity.start_recording = false;
-                                String[] scaling1 = {"-l", "0", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
+                                String[] scaling1 = {"-l", "-1", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
 
                                 fname1 = "range1";
                                 file1 = new File(dir_str, fname1);
@@ -1845,7 +1850,7 @@ public class CalibActivity extends AppCompatActivity {
                                 fname2 = "svminput.scale.model";
                                 file2 = new File(dir_str, fname2);
                                 fpath2 = file2.toString();
-                                String[] training2 = {fpath1, fpath2};
+                                String[] training2 = {fpath1, "-v", "5", fpath2};
 
                                 fname1 = "svminput.t";
                                 file1 = new File(dir_str, fname1);

@@ -17,7 +17,8 @@ import java.lang.ref.WeakReference;
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button connectbutton,connectbutton1, authbutton, handlerbutton;
-
+    private static final int REQUEST_LOGIN = 0;
+    String name= null;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -66,15 +67,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(MainActivity.this, LoginActivity.class);
 
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
-
+            //startActivity(i);
+            startActivityForResult(i, REQUEST_LOGIN);
 
         } else if (v.getId() == R.id.handlerbutton) {
             Intent i = new Intent(MainActivity.this, Handlers.class);
+            if(name!=null) {
+                i.putExtra("Name", name);
+                Log.d("In Main. Name", name);
+            }
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }
 
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (requestCode == REQUEST_LOGIN) {
+            if (resultCode == RESULT_OK) {
+                Bundle res = data.getExtras();
+                String result = res.getString("User: ");
+                name = result;
+            }
+        }
     }
 
 
