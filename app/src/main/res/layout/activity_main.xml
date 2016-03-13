@@ -32,7 +32,7 @@
             android:layout_height="fill_parent"
             android:text="Connect to Muse"
             android:layout_weight="1"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:id="@+id/connectbutton" />
     </LinearLayout>
 
@@ -47,7 +47,7 @@
             android:layout_height="fill_parent"
             android:text="Connect to Wristband"
             android:layout_weight="1"
-            android:textSize="24sp"
+            android:textSize="18sp"
             android:id="@+id/connectbutton1" />
     </LinearLayout>
 
@@ -70,7 +70,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight = "1"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:text="Authentication"
                 android:id="@+id/authbutton" />
         </LinearLayout>
@@ -86,7 +86,7 @@
                 android:layout_height="fill_parent"
                 android:layout_weight = "1"
                 android:text="start training"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:id="@+id/handlerbutton" />
         </LinearLayout>
     </LinearLayout>

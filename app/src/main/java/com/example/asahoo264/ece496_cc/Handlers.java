@@ -42,9 +42,9 @@ public class Handlers extends AppCompatActivity implements View.OnClickListener 
     public void onClick(View v) {
 
         if (v.getId() == R.id.calibbutton) {
-            Intent i = new Intent(Handlers.this, CalibActivity.class);
-            i.putExtra("Name", name);
-            Log.d("In Handler. Name", name);
+            Intent i = new Intent(Handlers.this, CalibIntro.class);
+            //i.putExtra("Name", name);
+            //Log.d("In Handler. Name", name);
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
 
