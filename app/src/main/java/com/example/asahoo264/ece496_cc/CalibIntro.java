@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
 import com.github.paolorotolo.appintro.AppIntro;
 import com.github.paolorotolo.appintro.AppIntroFragment;
@@ -11,7 +12,7 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 import java.util.Random;
 
 public class CalibIntro extends AppIntro {
-
+    String name = null;
     // Please DO NOT override onCreate. Use init.
     @Override
     public void init(Bundle savedInstanceState) {
@@ -22,6 +23,9 @@ public class CalibIntro extends AppIntro {
 //        addSlide(second_fragment);
 //        addSlide(third_fragment);
 //        addSlide(fourth_fragment);
+        Intent intent = getIntent();
+        name = intent.getStringExtra("Name");
+
         //SLIDE 1
        String title = "Welcome to the Calibration module";
        String description = "This module trains the brain to react to vibration patterns in positive and negative ways";
@@ -40,7 +44,7 @@ public class CalibIntro extends AppIntro {
         //SLIDE 3
         Random r = new Random();
         int i1 = r.nextInt(100 - 50) + 50;
-        int i2 = r.nextInt(10 - 0);
+        int i2 = r.nextInt(10 - 0) + 2;
         description = "Let's focus by doing math!";
         title = "Multiply " + String.valueOf(i1)+ " X " + String.valueOf(i2) + " = ?";
         image = R.drawable.iconmath;
@@ -67,15 +71,32 @@ public class CalibIntro extends AppIntro {
         //i.putExtra("Name", name);
         //Log.d("In Handler. Name", name);
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);    }
+        startActivity(i);
+        finish();
+    }
 
     @Override
     public void onDonePressed() {
         Intent i = new Intent(CalibIntro.this, CalibActivity.class);
-        //i.putExtra("Name", name);
-        //Log.d("In Handler. Name", name);
+
+        i.putExtra("Name", name);
+        if(name != null) {
+            Log.d("In Handler. Name", name);
+        }
         i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-        startActivity(i);    }
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(CalibIntro.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
 
     @Override
     public void onSlideChanged() {

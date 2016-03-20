@@ -259,6 +259,15 @@ public class MuseConnectionService extends IntentService {
                             }
                         }).start();
                         break;
+                    case GAMMA_ABSOLUTE:
+                        new Thread(new Runnable() {
+                            @Override
+                            public void run() {
+                                RefObjs.updateGammaAbsolute(temp.getValues());
+
+                            }
+                        }).start();
+                        break;
                     case THETA_RELATIVE:
                         new Thread(new Runnable() {
                             @Override

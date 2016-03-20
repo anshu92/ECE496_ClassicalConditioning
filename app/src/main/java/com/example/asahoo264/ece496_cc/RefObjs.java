@@ -30,7 +30,8 @@ public class RefObjs extends Application{
     public static boolean start_of_event=false;
     public static ArrayList<Double> alpha_val = new ArrayList<Double>();
     public static ArrayList<Double> beta_val = new ArrayList<Double>();
-    public static ArrayList<Double> gamma_val = new ArrayList<Double>();
+    public static ArrayList<ArrayList<Double>> gamma_val = new ArrayList<ArrayList<Double>>();
+    public static ArrayList<Double> gamma_val_rel = new ArrayList<Double>();
     public static ArrayList<Double> theta_val = new ArrayList<Double>();
     public static Double concentration = 0.0;
 
@@ -94,7 +95,22 @@ public class RefObjs extends Application{
   public static void updateGammaRelative(final ArrayList<Double> data) {
       Double n = average(data);
       if (start_of_event && n != null && !n.isNaN()) {
-            gamma_val.add(n);        }
+          gamma_val_rel.add(n);        }
+
+    }
+
+    public static void updateGammaAbsolute(final ArrayList<Double> data) {
+        Double n = average(data);
+        //String size = "Size: " + data.size();
+        //Log.d("Data: ", size);
+        if (start_of_event && n != null && !n.isNaN()) {
+            ArrayList<Double> gamma_val_inner = new ArrayList<Double>(data);
+            gamma_val.add(gamma_val_inner);
+            /*for(int i=0; i< data.size(); i++){
+                gamma_val_inner.add(data.get(i));
+                gamma_val.get(i).add(gamma_val_inner);
+            }*/
+        }
 
     }
 
@@ -148,23 +164,36 @@ public class RefObjs extends Application{
 
         beta_val.clear();
 
-        double gamma_sum = 0;
-        double gamma_var_sum = 0;
-        double gamma_mean;
-        double gamma_var;
-        double[] gamma_data = new double[gamma_val.size()];
-        for(int i = 0; i < gamma_val.size();i++){
-            gamma_sum  =  gamma_sum +  gamma_val.get(i).doubleValue();
-            gamma_data[i] = gamma_val.get(i).doubleValue();
+        double[] gamma_sum = new double[4];
+        double[] gamma_var_sum = new double[4];
+        double[] gamma_mean = new double[4];
+        double[] gamma_var = new double[4];
+        double[] gamma_data = new double[4];
+
+        String gm = "Size: " + gamma_val.size();
+        if(gamma_val.size() != 0) {
+            String gm_in = "Inner Size: " + gamma_val.get(0).size();
+            Log.d(gm, gm_in);
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < gamma_val.size(); j++) {
+                    gamma_sum[i] += gamma_val.get(j).get(i).doubleValue();
+                }
+                gamma_mean[i] = gamma_sum[i] / gamma_val.size();
+                gamma_data[i] = gamma_mean[i];
+            }
+
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < gamma_val.size(); j++) {
+                    gamma_var_sum[i] = gamma_var_sum[i] + (gamma_val.get(j).get(i).doubleValue() - gamma_mean[i]) * (gamma_val.get(j).get(i).doubleValue() - gamma_mean[i]);
+                }
+                gamma_var[i] = gamma_var_sum[i] / gamma_val.size();
+            }
         }
-        gamma_mean = gamma_sum/gamma_val.size();
-        for(int i = 0; i < gamma_val.size();i++){
-            gamma_var_sum  =  gamma_var_sum +  (gamma_val.get(i).doubleValue()-gamma_mean)*(gamma_val.get(i).doubleValue()-gamma_mean);
-        }
-        gamma_var = gamma_var_sum/gamma_val.size();
         if(gamma_val.size() == 0){
             Log.d("Size","Zero");
-            gamma_var = 0;
+            for(int i = 0; i < gamma_data.length;i++) {
+                gamma_data[i] = 0;
+            }
         }
         gamma_val.clear();
 
@@ -263,14 +292,14 @@ public class RefObjs extends Application{
         double gamma_var_sum = 0;
         double gamma_mean;
         double gamma_var;
-        for(int i = 0; i < gamma_val.size();i++){
-            gamma_sum  =  gamma_sum +  gamma_val.get(i).doubleValue();
+        for(int i = 0; i < gamma_val_rel.size();i++){
+            gamma_sum  =  gamma_sum +  gamma_val_rel.get(i).doubleValue();
         }
-        gamma_mean = gamma_sum/gamma_val.size();
-        for(int i = 0; i < gamma_val.size();i++){
-            gamma_var_sum  =  gamma_var_sum +  (gamma_val.get(i).doubleValue()-gamma_mean)*(gamma_val.get(i).doubleValue()-gamma_mean);
+        gamma_mean = gamma_sum/gamma_val_rel.size();
+        for(int i = 0; i < gamma_val_rel.size();i++){
+            gamma_var_sum  =  gamma_var_sum +  (gamma_val_rel.get(i).doubleValue()-gamma_mean)*(gamma_val_rel.get(i).doubleValue()-gamma_mean);
         }
-        gamma_var = gamma_var_sum/gamma_val.size();
+        gamma_var = gamma_var_sum/gamma_val_rel.size();
 
 
         double theta_sum = 0;

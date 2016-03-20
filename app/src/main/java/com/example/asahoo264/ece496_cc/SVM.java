@@ -304,6 +304,114 @@ class svm_train {
     }
 }
 
+class svm_predict_single{
+
+    private static double atof(String s)
+    {
+        return Double.valueOf(s).doubleValue();
+    }
+
+    private static int atoi(String s)
+    {
+        return Integer.parseInt(s);
+    }
+
+    private static double predict(String input, svm_model model, int predict_probability) throws IOException
+    {
+        int correct = 0;
+        int total = 0;
+        double error = 0;
+        double sumv = 0, sumy = 0, sumvv = 0, sumyy = 0, sumvy = 0;
+        double ret = 0;
+
+        int svm_type=svm.svm_get_svm_type(model);
+        int nr_class=svm.svm_get_nr_class(model);
+        double[] prob_estimates=null;
+
+        String output = null;
+
+        if(predict_probability == 1)
+        {
+            if(svm_type == svm_parameter.EPSILON_SVR ||
+                    svm_type == svm_parameter.NU_SVR)
+            {
+                svm_predict.info("Prob. model for test data: target value = predicted value + z,\nz: Laplace distribution e^(-|z|/sigma)/(2sigma),sigma="+svm.svm_get_svr_probability(model)+"\n");
+            }
+            else
+            {
+                int[] labels=new int[nr_class];
+                svm.svm_get_labels(model,labels);
+                prob_estimates = new double[nr_class];
+                output += "labels";
+                for(int j=0;j<nr_class;j++)
+                    output += " "+labels[j];
+                output += "\n";
+            }
+        }
+
+        StringTokenizer st = new StringTokenizer(input," \t\n\r\f:");
+
+        double target = atof(st.nextToken());
+        int m = st.countTokens()/2;
+        svm_node[] x = new svm_node[m];
+        for(int j=0;j<m;j++)
+        {
+            x[j] = new svm_node();
+            x[j].index = atoi(st.nextToken());
+            x[j].value = atof(st.nextToken());
+        }
+
+        double v;
+        if (predict_probability==1 && (svm_type==svm_parameter.C_SVC || svm_type==svm_parameter.NU_SVC))
+        {
+            v = svm.svm_predict_probability(model,x,prob_estimates);
+            output += v+" ";
+            for(int j=0;j<nr_class;j++)
+                output += prob_estimates[j]+" ";
+            output += "\n";
+            ret = v;
+        }
+        else
+        {
+            v = svm.svm_predict(model,x);
+            output += v+"\n";
+            ret = v;
+        }
+
+        return ret;
+    }
+
+    public static double main(String argv[]) throws IOException
+    {
+        int i = 0, predict_probability=0;
+        double ret = 0;
+
+        String input = argv[i];
+        svm_model model = svm.svm_load_model(argv[i+1]);
+        if (model == null)
+        {
+            System.err.print("can't open model file "+argv[i+1]+"\n");
+            System.exit(1);
+        }
+        if(predict_probability == 1)
+        {
+            if(svm.svm_check_probability_model(model)==0)
+            {
+                System.err.print("Model does not support probabiliy estimates\n");
+                System.exit(1);
+            }
+        }
+        else
+        {
+            if(svm.svm_check_probability_model(model)!=0)
+            {
+                svm_predict.info("Model supports probability estimates, but disabled in prediction.\n");
+            }
+        }
+        ret = predict(input, model, predict_probability);
+        return ret;
+    }
+}
 class svm_predict {
     public static String acc = null;
     private static svm_print_interface svm_print_null = new svm_print_interface()

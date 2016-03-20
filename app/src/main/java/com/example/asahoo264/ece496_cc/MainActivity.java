@@ -16,7 +16,7 @@ import java.lang.ref.WeakReference;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
-    Button connectbutton,connectbutton1, authbutton, handlerbutton;
+    Button connectbutton,connectbutton1, authbutton, handlerbutton, handlerbutton2;
     private static final int REQUEST_LOGIN = 0;
     String name= null;
     @Override
@@ -27,12 +27,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         connectbutton1 = (Button) findViewById(R.id.connectbutton1);
         authbutton = (Button) findViewById(R.id.authbutton);
         handlerbutton = (Button) findViewById(R.id.handlerbutton);
+        handlerbutton2 = (Button) findViewById(R.id.handlerbutton2);
 
         connectbutton.setOnClickListener(this);
         connectbutton1.setOnClickListener(this);
         authbutton.setOnClickListener(this);
         handlerbutton.setOnClickListener(this);
-
+        handlerbutton2.setOnClickListener(this);
     }
 
     @Override
@@ -72,6 +73,14 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         } else if (v.getId() == R.id.handlerbutton) {
             Intent i = new Intent(MainActivity.this, Handlers.class);
+            if(name!=null) {
+                i.putExtra("Name", name);
+                Log.d("In Main. Name", name);
+            }
+            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            startActivity(i);
+        }else if (v.getId() == R.id.handlerbutton2) {
+            Intent i = new Intent(MainActivity.this, Handlers2.class);
             if(name!=null) {
                 i.putExtra("Name", name);
                 Log.d("In Main. Name", name);

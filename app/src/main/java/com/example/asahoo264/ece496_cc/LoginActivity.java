@@ -75,7 +75,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             onLoginFailed();
             return;
         }
-
+        boolean flag = false;
         _loginButton.setEnabled(false);
 
         final ProgressDialog progressDialog = new ProgressDialog(LoginActivity.this,
@@ -117,12 +117,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("Stored: ", fcontent);
 
                     if (user.equals(name)) {
-                        if (pass.equals(encryptedData))
+                        if (pass.equals(encryptedData)) {
                             onLoginSuccess(name);
+                            flag = true;
+                        }
                         else
                             onLoginFailed();
                     }
                 }
+                if(!flag)
+                    onLoginFailed();
             }
 
         }catch (IOException e){
@@ -152,15 +156,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
     }
-
+/*
     @Override
     public void onBackPressed() {
         // Disable going back to the MainActivity
         moveTaskToBack(true);
     }
+*/
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
 
+        Intent intent = new Intent(LoginActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
     public void onLoginSuccess(String name) {
         _loginButton.setEnabled(true);
+        Toast.makeText(getBaseContext(), "Login successful", Toast.LENGTH_SHORT).show();
         Bundle conData = new Bundle();
         conData.putString("User: ", name);
         data.putExtras(conData);
@@ -174,9 +188,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_SHORT).show();
 
         _loginButton.setEnabled(true);
+
+        finish();
     }
 
     public boolean validate() {
@@ -201,4 +217,5 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         return valid;
     }
+
 }

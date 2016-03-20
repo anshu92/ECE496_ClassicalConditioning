@@ -27,13 +27,34 @@
         android:clickable="false"
         android:contextClickable="false">
 
-        <Button
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
-            android:text="Connect to Muse"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:id="@+id/connectbutton" />
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="fill_parent"
+                android:layout_height="match_parent"
+                android:text="Connect to Muse"
+                android:textSize="14sp"
+                android:id="@+id/connectbutton" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="Connect to Wristband"
+                android:textSize="14sp"
+                android:id="@+id/connectbutton1" />
+        </LinearLayout>
     </LinearLayout>
 
     <LinearLayout
@@ -43,12 +64,12 @@
         android:layout_weight="1">
 
         <Button
-            android:layout_width="wrap_content"
+            android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:text="Connect to Wristband"
-            android:layout_weight="1"
-            android:textSize="18sp"
-            android:id="@+id/connectbutton1" />
+            android:layout_weight = "1"
+            android:textSize="14sp"
+            android:text="Authentication"
+            android:id="@+id/authbutton" />
     </LinearLayout>
 
 </LinearLayout>
@@ -70,9 +91,9 @@
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
                 android:layout_weight = "1"
-                android:textSize="18sp"
-                android:text="Authentication"
-                android:id="@+id/authbutton" />
+                android:text="start training"
+                android:textSize="14sp"
+                android:id="@+id/handlerbutton" />
         </LinearLayout>
 
         <LinearLayout
@@ -84,10 +105,10 @@
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
-                android:layout_weight = "1"
-                android:text="start training"
-                android:textSize="18sp"
-                android:id="@+id/handlerbutton" />
+                android:layout_weight="1"
+                android:text="verification"
+                android:textSize="14sp"
+                android:id="@+id/handlerbutton2" />
         </LinearLayout>
     </LinearLayout>
     </LinearLayout>

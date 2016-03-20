@@ -175,7 +175,8 @@
                 android:layout_height="wrap_content"
                 android:text="back"
                 android:layout_gravity="bottom|left"
-                android:id="@+id/back" />
+                android:id="@+id/back"
+                android:visibility="invisible" />
         </LinearLayout>
     </LinearLayout>
 

@@ -142,9 +142,7 @@ public class ConnectActivity extends Activity implements OnClickListener{
             //this.moveTaskToBack(true);
             moveTaskToBack(true);
             //finish();
-            //Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
-            //intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            //startActivity(intent);
+
         }
         else if (v.getId() == R.id.connect) {
             List<Muse> pairedMuses = MuseManager.getPairedMuses();
@@ -332,6 +330,16 @@ public class ConnectActivity extends Activity implements OnClickListener{
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+        Intent intent = new Intent(ConnectActivity.this, MainActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        startActivity(intent);
+
+    }
+
     public void configureLibrary() {
 
         RefObjs.muse.registerConnectionListener(MuseConnectionService.connectionListener);
@@ -341,6 +349,8 @@ public class ConnectActivity extends Activity implements OnClickListener{
                 MuseDataPacketType.BETA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
                 MuseDataPacketType.GAMMA_RELATIVE);
+        RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
+                MuseDataPacketType.GAMMA_ABSOLUTE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,
                 MuseDataPacketType.THETA_RELATIVE);
         RefObjs.muse.registerDataListener(MuseConnectionService.dataListener,

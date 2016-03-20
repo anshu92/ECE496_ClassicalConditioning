@@ -1601,8 +1601,9 @@ public class CalibActivity extends AppCompatActivity {
         timer = new CalibCountDownTimer(startTime,interval);
 
         dir_str = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
-        if(name!=null)
+        if(name!=null) {
             dir_str = dir_str + File.separator + name + File.separator;
+        }
             Log.d("In Calib. Directory", dir_str);
                weakActivity = new WeakReference<Activity>(this);
 
@@ -1759,7 +1760,7 @@ public class CalibActivity extends AppCompatActivity {
                                                 }
                                         });
                                         try {
-                                                Thread.sleep(5000); // Waits for 1 second (1000 milliseconds)
+                                                Thread.sleep(4000); // Waits for 1 second (1000 milliseconds)
                                         } catch (InterruptedException e) {
                                                 e.printStackTrace();
                                         }
@@ -1770,7 +1771,8 @@ public class CalibActivity extends AppCompatActivity {
                                                         RefObjs.start_of_event = false;
 
                                                         try {
-                                                                RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state,dir_str);
+                                                                if(temp != 0)
+                                                                        RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state,dir_str);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();
                                                         }
@@ -1805,101 +1807,143 @@ public class CalibActivity extends AppCompatActivity {
                                         public void run() {
                                                 timertext.setText("CALIBRATION DONE");
                                         }};
-
+                            try {
                                 String fname1 = "range1";
                                 File file1 = new File(dir_str, fname1);
+                                if (!file1.exists()) {
+                                    file1.createNewFile();
+                                }
                                 String fpath1 = file1.toString();
 
                                 String fname2 = "svminput";
                                 File file2 = new File(dir_str, fname2);
+                                if (!file2.exists()) {
+                                    file2.createNewFile();
+                                }
                                 String fpath2 = file2.toString();
 
                                 String fname3 = "svminput.scale";
                                 File file3 = new File(dir_str, fname3);
+                                if (!file3.exists()) {
+                                    file3.createNewFile();
+                                }
                                 String fpath3 = file3.toString();
                                 //ConnectActivity.start_recording = false;
                                 String[] scaling1 = {"-l", "-1", "-u", "1", "-s", fpath1, fpath2/*, ">"*/, fpath3};
 
                                 fname1 = "range1";
                                 file1 = new File(dir_str, fname1);
+                                if (!file1.exists()) {
+                                    file1.createNewFile();
+                                }
                                 fpath1 = file1.toString();
 
                                 fname2 = "svminput.t";
                                 file2 = new File(dir_str, fname2);
+                                if (!file2.exists()) {
+                                    file2.createNewFile();
+                                }
                                 fpath2 = file2.toString();
 
                                 fname3 = "svminput.t.scale";
                                 file3 = new File(dir_str, fname3);
+                                if (!file3.exists()) {
+                                    file3.createNewFile();
+                                }
                                 fpath3 = file3.toString();
                                 String[] scaling2 = {"-r", fpath1, fpath2/*, ">"*/, fpath3};
 
                                 fname1 = "svminput";
                                 file1 = new File(dir_str, fname1);
+                                if (!file1.exists()) {
+                                    file1.createNewFile();
+                                }
                                 fpath1 = file1.toString();
 
                                 fname2 = "svminput.model";
                                 file2 = new File(dir_str, fname2);
+                                if (!file2.exists()) {
+                                    file2.createNewFile();
+                                }
                                 fpath2 = file2.toString();
                                 String[] training1 = {fpath1, fpath2};
-                                Log.d("Trianing1",fpath2);
+                                Log.d("Trianing1", fpath2);
 
                                 fname1 = "svminput.scale";
                                 file1 = new File(dir_str, fname1);
+                                if (!file1.exists()) {
+                                    file1.createNewFile();
+                                }
                                 fpath1 = file1.toString();
 
                                 fname2 = "svminput.scale.model";
                                 file2 = new File(dir_str, fname2);
+                                if (!file2.exists()) {
+                                    file2.createNewFile();
+                                }
                                 fpath2 = file2.toString();
-                                String[] training2 = {fpath1, "-v", "5", fpath2};
+                                String[] training2 = {"-v", "5", fpath1, fpath2};
+                                String[] training3 = {fpath1, fpath2};
 
                                 fname1 = "svminput.t";
                                 file1 = new File(dir_str, fname1);
+                                if (!file1.exists()) {
+                                    file1.createNewFile();
+                                }
                                 fpath1 = file1.toString();
 
                                 fname2 = "svminput.model";
                                 file2 = new File(dir_str, fname2);
+                                if (!file2.exists()) {
+                                    file2.createNewFile();
+                                }
                                 fpath2 = file2.toString();
 
                                 fname3 = "svminput.out";
                                 file3 = new File(dir_str, fname3);
+                                if (!file3.exists()) {
+                                    file3.createNewFile();
+                                }
                                 fpath3 = file3.toString();
                                 String[] testing1 = {fpath1, fpath2, fpath3, dir_str};
 
                                 fname1 = "svminput.t.scale";
                                 file1 = new File(dir_str, fname1);
+                                if (!file1.exists()) {
+                                    file1.createNewFile();
+                                }
                                 fpath1 = file1.toString();
 
                                 fname2 = "svminput.scale.model";
                                 file2 = new File(dir_str, fname2);
+                                if (!file2.exists()) {
+                                    file2.createNewFile();
+                                }
                                 fpath2 = file2.toString();
 
                                 fname3 = "svminput.scale.out";
                                 file3 = new File(dir_str, fname3);
+                                if (!file3.exists()) {
+                                    file3.createNewFile();
+                                }
                                 fpath3 = file3.toString();
 
                                 String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
                                 timer.start();
-                                try {
-                                        svm_scale.main(scaling1);
-                                } catch(IOException e) {
-                                        e.printStackTrace();
-                                }
-                                try {
-                                        svm_scale.main(scaling2);
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
-                                try {
-                                        svm_train.main(training2);
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
-                                try {
-                                        svm_predict.main(testing2);
-                                } catch (IOException e) {
-                                        e.printStackTrace();
-                                }
-                                alert = true;
+
+                                svm_scale.main(scaling1);
+
+                                svm_scale.main(scaling2);
+
+
+                                svm_train.main(training3);
+                                svm_train.main(training2);
+
+                                svm_predict.main(testing2);
+                            } catch (IOException e) {
+                                    e.printStackTrace();
+                            }
+                            alert = true;
                         }
 
                         };
@@ -1927,7 +1971,7 @@ public class CalibActivity extends AppCompatActivity {
         {
             timertext.setText("Time's up!");
                 average_conc = 0;
-
+/*
                 if(RefObjs.concentration*100 < 50){
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                 weakActivity.get());
@@ -1950,7 +1994,7 @@ public class CalibActivity extends AppCompatActivity {
                 }else{
                         alertDialog.cancel();
                 }
-
+*/
                 if(alert){
                         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(
                                 weakActivity.get());
@@ -1966,6 +2010,9 @@ public class CalibActivity extends AppCompatActivity {
                                         public void onClick(DialogInterface dialog, int id) {
                                                 // if this button is clicked, close
                                                 // current activity
+                                            /*Intent intent = new Intent(CalibActivity.this, MainActivity.class);
+                                            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                                            startActivity(intent);*/
                                                 finish();
                                         }
                                 });

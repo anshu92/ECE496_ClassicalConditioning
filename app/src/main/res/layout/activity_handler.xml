@@ -7,12 +7,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true">
+        android:layout_alignParentEnd="true"
+        android:weightSum="1">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="190dp">
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
 
             <Button
                 android:layout_width="fill_parent"
@@ -24,19 +26,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="190dp" >
-
-            <Button
-                android:layout_width="fill_parent"
-                android:layout_height="fill_parent"
-                android:text="PLOT"
-                android:id="@+id/plotbutton" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:orientation="vertical"
-            android:layout_width="match_parent"
-            android:layout_height="190dp">
+            android:layout_height="match_parent"
+            android:layout_weight="0.5">
 
             <Button
                 android:layout_width="fill_parent"
