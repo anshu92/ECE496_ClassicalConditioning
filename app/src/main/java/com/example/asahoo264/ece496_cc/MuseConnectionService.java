@@ -153,6 +153,13 @@ public class MuseConnectionService extends IntentService {
                     file8.delete();
                 }
 
+                fname = "svm_predict";
+                File file9  = new File(dir_str, fname);
+
+                if (file9.exists()) {
+                    file9.delete();
+                }
+
                 fileWriter.open();
             }
         }

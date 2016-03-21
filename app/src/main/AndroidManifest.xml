@@ -51,7 +51,13 @@
             android:exported="false" />
 
         <activity android:name=".WristbandActivity" />
-        <activity android:name=".CalibIntro"></activity>
+
+        <activity android:name=".CalibVerification" />
+        <activity android:name=".CalibVerificationHandler" />
+        <activity android:name=".CalibVerificationResult" />
+
+        <activity android:name=".CalibIntro">
+        </activity>
     </application>
 
 </manifest>

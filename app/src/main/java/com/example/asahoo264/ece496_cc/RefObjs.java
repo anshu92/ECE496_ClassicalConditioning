@@ -259,64 +259,42 @@ public class RefObjs extends Application{
     }
 
 
-    public static void predict_event(boolean emotion_val) throws IOException {
+    public static double predict_event(boolean emotion_val, String dir) throws IOException {
 
+        dir_str = dir;
 
-        double alpha_sum = 0;
-        double alpha_var_sum = 0;
-        double alpha_mean;
-        double alpha_var;
-        for(int i = 0; i < alpha_val.size();i++){
-            alpha_sum  =  alpha_sum +  alpha_val.get(i).doubleValue();
-        }
-        alpha_mean = alpha_sum/alpha_val.size();
-        for(int i = 0; i < alpha_val.size();i++){
-            alpha_var_sum  =  alpha_var_sum +  (alpha_val.get(i).doubleValue()-alpha_mean)*(alpha_val.get(i).doubleValue()-alpha_mean);
-        }
-        alpha_var = alpha_var_sum/alpha_val.size();
+        double[] gamma_sum = new double[4];
+        double[] gamma_var_sum = new double[4];
+        double[] gamma_mean = new double[4];
+        double[] gamma_var = new double[4];
+        double[] gamma_data = new double[4];
 
-        double beta_sum = 0;
-        double beta_var_sum = 0;
-        double beta_mean;
-        double beta_var;
-        for(int i = 0; i < beta_val.size();i++){
-            beta_sum  =  beta_sum +  beta_val.get(i).doubleValue();
-        }
-        beta_mean = beta_sum/beta_val.size();
-        for(int i = 0; i < beta_val.size();i++){
-            beta_var_sum  =  beta_var_sum +  (beta_val.get(i).doubleValue()-beta_mean)*(beta_val.get(i).doubleValue()-beta_mean);
-        }
-        beta_var = beta_var_sum/beta_val.size();
+        String gm = "Size: " + gamma_val.size();
+        if(gamma_val.size() != 0) {
+            String gm_in = "Inner Size: " + gamma_val.get(0).size();
+            Log.d(gm, gm_in);
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < gamma_val.size(); j++) {
+                    gamma_sum[i] += gamma_val.get(j).get(i).doubleValue();
+                }
+                gamma_mean[i] = gamma_sum[i] / gamma_val.size();
+                gamma_data[i] = gamma_mean[i];
+            }
 
-        double gamma_sum = 0;
-        double gamma_var_sum = 0;
-        double gamma_mean;
-        double gamma_var;
-        for(int i = 0; i < gamma_val_rel.size();i++){
-            gamma_sum  =  gamma_sum +  gamma_val_rel.get(i).doubleValue();
+            for (int i = 0; i < 4; i++) {
+                for (int j = 0; j < gamma_val.size(); j++) {
+                    gamma_var_sum[i] = gamma_var_sum[i] + (gamma_val.get(j).get(i).doubleValue() - gamma_mean[i]) * (gamma_val.get(j).get(i).doubleValue() - gamma_mean[i]);
+                }
+                gamma_var[i] = gamma_var_sum[i] / gamma_val.size();
+            }
         }
-        gamma_mean = gamma_sum/gamma_val_rel.size();
-        for(int i = 0; i < gamma_val_rel.size();i++){
-            gamma_var_sum  =  gamma_var_sum +  (gamma_val_rel.get(i).doubleValue()-gamma_mean)*(gamma_val_rel.get(i).doubleValue()-gamma_mean);
+        if(gamma_val.size() == 0){
+            Log.d("Size","Zero");
+            for(int i = 0; i < gamma_data.length;i++) {
+                gamma_data[i] = 0;
+            }
         }
-        gamma_var = gamma_var_sum/gamma_val_rel.size();
-
-
-        double theta_sum = 0;
-        double theta_var_sum = 0;
-        double theta_mean;
-        double theta_var;
-        for(int i = 0; i < theta_val.size();i++){
-            theta_sum  =  theta_sum +  theta_val.get(i).doubleValue();
-        }
-        theta_mean = theta_sum/theta_val.size();
-        for(int i = 0; i < theta_val.size();i++){
-            theta_var_sum  =  theta_var_sum +  (theta_val.get(i).doubleValue()-theta_mean)*(theta_val.get(i).doubleValue()-theta_mean);
-        }
-        theta_var = theta_var_sum/theta_val.size();
-
-        String fname = "svmpredict";
-        String fcontent;
+        gamma_val.clear();
 
         int emotion_label;
         if(emotion_val)
@@ -324,16 +302,21 @@ public class RefObjs extends Application{
         else
             emotion_label = -1;
 
+        String fname = "svm_predict";
         File file = new File(dir_str, fname);
         // If file does not exists, then create it
         if (!file.exists()) {
             file.createNewFile();
         }
 
+        final String fcontent;
+        //if(alpha_var==0 && beta_var==0 && gamma_var==0 && theta_var==0)
+        if(gamma_data.length == 0 || (gamma_data[0]==0 && gamma_data[1]==0 && gamma_data[2]==0 && gamma_data[3]==0))
+            return 0;
         try {
-            fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
-            //Toast.makeText(this, fcontent, Toast.LENGTH_SHORT).show();
-
+            //fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
+            fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(gamma_data[0]) + " 2:" + String.valueOf(gamma_data[1])  + " 3:" + String.valueOf(gamma_data[2]) + " 4:"  +  String.valueOf(gamma_data[3]) + "\n";
+            Log.d("FCONTENT: ", fcontent);
             FileOutputStream fOut = new FileOutputStream(file,false);
             OutputStreamWriter myOutWriter = new OutputStreamWriter(fOut);
             myOutWriter.write(fcontent);
@@ -348,33 +331,58 @@ public class RefObjs extends Application{
 
         }
 
-        String fname1 = "svmpredict.out";
+        return send_predict();
+    }
+
+    private static double send_predict() throws IOException {
+        String fname1 = "range1";
         File file1 = new File(dir_str, fname1);
+        if (!file1.exists()) {
+            file1.createNewFile();
+        }
         String fpath1 = file1.toString();
 
-        String fname2 = "svmpredict.model";
+        String fname2 = "svm_predict";
         File file2 = new File(dir_str, fname2);
-        String fpath2 = file2.toString();
-        String fpath = file.toString();
-
-        int prediction;
-        String[] testing1 = {fpath, fpath2, fpath1};
-
-        try {
-            svm_predict.main(testing1);
-        } catch (IOException e) {
-            e.printStackTrace();
+        if (!file2.exists()) {
+            file2.createNewFile();
         }
+        String fpath2 = file2.toString();
 
-        Integer result;
+        String fname3 = "svm_predict.scale";
+        File file3 = new File(dir_str, fname3);
+        if (!file3.exists()) {
+            file3.createNewFile();
+        }
+        String fpath3 = file3.toString();
+        String[] scaling = {"-r", fpath1, fpath2/*, ">"*/, fpath3};
 
-        FileInputStream fIn = new FileInputStream(file1);
-        result = fIn.read();
-        fIn.close();
-        // Toast.makeText(this, "prediction: " + result.toString(), Toast.LENGTH_SHORT).show();
+        fname1 = "svm_predict.scale";
+        file1 = new File(dir_str, fname1);
+        if (!file1.exists()) {
+            file1.createNewFile();
+        }
+        fpath1 = file1.toString();
 
+        fname2 = "svminput.scale.model";
+        file2 = new File(dir_str, fname2);
+        if (!file2.exists()) {
+            file2.createNewFile();
+        }
+        fpath2 = file2.toString();
 
+        fname3 = "svm_predict.out";
+        file3 = new File(dir_str, fname3);
+        if (!file3.exists()) {
+            file3.createNewFile();
+        }
+        fpath3 = file3.toString();
 
+        String[] testing = {fpath1, fpath2, fpath3, dir_str};
+
+        svm_scale.main(scaling);
+
+        return svm_predict_single.main(testing);
     }
 
     private static Double average(ArrayList<Double> list) {

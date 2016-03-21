@@ -51,7 +51,11 @@ public class Handlers extends AppCompatActivity implements View.OnClickListener 
 
 
         } else if (v.getId() == R.id.verifybutton) {
-            Intent i = new Intent(Handlers.this, CalibVerification.class);
+            Intent i = new Intent(Handlers.this, CalibVerificationHandler.class);
+            i.putExtra("Name", name);
+            if(name != null) {
+                Log.d("In Handler. Name", name);
+            }
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);
         }

@@ -3,6 +3,7 @@ package com.example.asahoo264.ece496_cc;
 /**
  * Created by YanyanZ on 2/10/16.
  */
+import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
@@ -35,6 +36,8 @@ import javax.crypto.spec.SecretKeySpec;
 
 public class SignupActivity extends AppCompatActivity implements View.OnClickListener{
     private static final String TAG = "SignupActivity";
+
+    Intent data = new Intent();
 
     EditText _nameText, _emailText, _passwordText;
     Button _signupButton;
@@ -140,7 +143,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                 success = folder.mkdir();
             }
             if (success) {
-                // Do something on success
+                onSignupSuccess(name);
             } else {
                 onSignupFailed();
                 return;
@@ -151,6 +154,7 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
             e.printStackTrace();
 
         }
+        /*
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
@@ -160,13 +164,21 @@ public class SignupActivity extends AppCompatActivity implements View.OnClickLis
                         // onSignupFailed();
                         progressDialog.dismiss();
                     }
-                }, 3000);
+                }, 3000);*/
     }
 
 
-    public void onSignupSuccess() {
+    public void onSignupSuccess(String name) {
         _signupButton.setEnabled(true);
-        setResult(RESULT_OK, null);
+        Bundle conData = new Bundle();
+        conData.putString("User: ", name);
+        data.putExtras(conData);
+        setResult(RESULT_OK, data);
+        if (getParent() == null) {
+            setResult(RESULT_OK, data);
+        } else {
+            getParent().setResult(RESULT_OK, data);
+        }
         finish();
     }
 

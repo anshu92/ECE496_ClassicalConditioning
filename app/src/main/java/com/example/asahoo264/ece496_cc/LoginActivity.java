@@ -98,16 +98,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 while(st.hasMoreTokens()) {
                     String user = st.nextToken();
                     String pass = st.nextToken();
-                    Log.d("Token: ", user + " " + pass);
-                /*cipher myCipher = new cipher();
-                byte[] decryptedData = null;
-                try{
-                    decryptedData = myCipher.decrypt(key.getBytes("utf-8"), pass.getBytes("utf-8"));
-                }
-                catch(Exception e){
-                    e.printStackTrace();
-                }
-                */
                     MD5 enc = new MD5();
                     String encryptedData = enc.crypt(password);
 
@@ -117,18 +107,24 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     Log.d("Stored: ", fcontent);
 
                     if (user.equals(name)) {
+                        Log.d("Name match: ", fcontent);
                         if (pass.equals(encryptedData)) {
-                            onLoginSuccess(name);
+                            Log.d("Pass match: ", fcontent);
                             flag = true;
+                            onLoginSuccess(name);
+                            break;
                         }
-                        else
+                        else {
+                            Log.d("Login failed: ", fcontent);
                             onLoginFailed();
+                        }
                     }
                 }
-                if(!flag)
-                    onLoginFailed();
+
             }
 
+            if(!flag)
+                onLoginFailed();
         }catch (IOException e){
             e.printStackTrace();
         }
@@ -150,9 +146,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if (requestCode == REQUEST_SIGNUP) {
             if (resultCode == RESULT_OK) {
 
-                // TODO: Implement successful signup logic here
-                // By default we just finish the Activity and log them in automatically
-                this.finish();
+                // Successful signup logic here
+                Bundle res = data.getExtras();
+                String result = res.getString("User: ");
+                onLoginSuccess(result);
             }
         }
     }

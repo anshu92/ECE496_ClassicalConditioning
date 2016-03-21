@@ -351,7 +351,7 @@ class svm_predict_single{
 
         StringTokenizer st = new StringTokenizer(input," \t\n\r\f:");
 
-        double target = atof(st.nextToken());
+//        double target = atof(st.nextToken());
         int m = st.countTokens()/2;
         svm_node[] x = new svm_node[m];
         for(int j=0;j<m;j++)
@@ -378,6 +378,7 @@ class svm_predict_single{
             ret = v;
         }
 
+        Log.d("Predict single data: ", "result " + ret);
         return ret;
     }
 

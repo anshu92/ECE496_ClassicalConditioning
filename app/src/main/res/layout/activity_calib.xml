@@ -126,8 +126,8 @@
                 <ImageButton
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:id="@+id/imageButton"
-                    android:src="@drawable/happyicon" />
+                    android:id="@+id/imageButton3"
+                    android:src="@drawable/happy"/>
             </LinearLayout>
 
             <LinearLayout
@@ -140,7 +140,20 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:id="@+id/imageButton2"
-                    android:src="@drawable/sadicon" />
+                    android:src="@drawable/neural" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <ImageButton
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/imageButton"
+                    android:src="@drawable/sad"/>
             </LinearLayout>
         </LinearLayout>
     </FrameLayout>

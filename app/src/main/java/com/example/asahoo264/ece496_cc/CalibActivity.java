@@ -68,6 +68,7 @@ public class CalibActivity extends AppCompatActivity {
             "AVERSION"
     };
     private static boolean emotion_val = false;
+        private static boolean if_neutral = false;
 
     private String[] urls_happy = {
             "https://googledrive.com/host/0ByMFXhN-e7luNVFXZnEzWnluQk0/P001.bmp",
@@ -190,7 +191,10 @@ public class CalibActivity extends AppCompatActivity {
             "https://googledrive.com/host/0ByMFXhN-e7luNVFXZnEzWnluQk0/P127.bmp",
             "https://googledrive.com/host/0ByMFXhN-e7luNVFXZnEzWnluQk0/P128.bmp",
             "https://googledrive.com/host/0ByMFXhN-e7luNVFXZnEzWnluQk0/P129.bmp",
-            "https://googledrive.com/host/0ByMFXhN-e7luNVFXZnEzWnluQk0/P130.bmp",
+            "https://googledrive.com/host/0ByMFXhN-e7luNVFXZnEzWnluQk0/P130.bmp"
+    };
+
+    private  String[] urls_neutral = {
             "https://googledrive.com/host/0ByMFXhN-e7luZkc5dVZjaTBRMlE/N001.bmp",
             "https://googledrive.com/host/0ByMFXhN-e7luZkc5dVZjaTBRMlE/N002.bmp",
             "https://googledrive.com/host/0ByMFXhN-e7luZkc5dVZjaTBRMlE/N003.bmp",
@@ -1561,6 +1565,7 @@ public class CalibActivity extends AppCompatActivity {
     private int aversion_counter = 0;
     private boolean is_train = true;
     private int number_images = 20;
+        private boolean state_flag = false;
     private boolean switch_state = false;
         long test = 0;
     /** soundId for Later handling of sound pool **/
@@ -1583,7 +1588,7 @@ public class CalibActivity extends AppCompatActivity {
         private WeakReference<Activity> weakActivity;
 
 
-    private ImageButton happy, sad;
+    private ImageButton happy, sad, neutral;
        private AlertDialog alertDialog;
 
 
@@ -1595,8 +1600,9 @@ public class CalibActivity extends AppCompatActivity {
                 Intent intent = getIntent();
                 name = intent.getStringExtra("Name");
         sw = (ImageView) findViewById(R.id.imageSwitcher);
-        happy = (ImageButton) findViewById(R.id.imageButton);
-            sad = (ImageButton) findViewById(R.id.imageButton2);
+        happy = (ImageButton) findViewById(R.id.imageButton3);
+        sad = (ImageButton) findViewById(R.id.imageButton);
+                neutral  = (ImageButton) findViewById(R.id.imageButton2);
         timertext = (TextView)findViewById(R.id.timer);
         timer = new CalibCountDownTimer(startTime,interval);
 
@@ -1634,20 +1640,25 @@ public class CalibActivity extends AppCompatActivity {
                 for(int i =0; i<number_images;i++) {
                         int index = r.nextInt(urls.length - 1);
                         url[i] = urls[index];
-                        if (index >= 210) {
-                                aversion_counter++;
-                                if (aversion_counter > 3) {
-                                        aversion_counter = 0;
-                                        url[i] = urls_happy[r.nextInt(urls_happy.length - 1)];
+                        if(i%2 == 1){
+                                if (index >= 210) {
+                                        aversion_counter++;
+                                        if (aversion_counter > 3) {
+                                                aversion_counter = 0;
+                                                url[i] = urls_happy[r.nextInt(urls_happy.length - 1)];
 
-                                }
-                        } else {
-                                happy_counter++;
-                                if (happy_counter > 3) {
-                                        happy_counter = 0;
-                                        url[i] = urls_aversion[r.nextInt(urls_aversion.length - 1)];
+                                        }
+                                } else {
+                                        happy_counter++;
+                                        if (happy_counter > 3) {
+                                                happy_counter = 0;
+                                                url[i] = urls_aversion[r.nextInt(urls_aversion.length - 1)];
 
+                                        }
                                 }
+                        }
+                        else{
+                                url[i] = urls_neutral[r.nextInt(urls_neutral.length - 1)];
                         }
                 }
 
@@ -1683,15 +1694,17 @@ public class CalibActivity extends AppCompatActivity {
 
 
             happy.setOnClickListener(new View.OnClickListener() {
-                public void onClick(View v) {
-                    try {
-                        switch_state = true;
-                        happy.setBackgroundColor(Color.GREEN);
-                        sad.setBackgroundColor(0);
-                    } catch (Exception e) {
-                        e.printStackTrace();
+                    public void onClick(View v) {
+                            try {
+                                    switch_state = true;
+                                    happy.setBackgroundColor(Color.GREEN);
+                                    sad.setBackgroundColor(0);
+                                    neutral.setBackgroundColor(0);
+                                    state_flag = true;
+                            } catch (Exception e) {
+                                    e.printStackTrace();
+                            }
                     }
-                }
             });
 
             sad.setOnClickListener(new View.OnClickListener()   {
@@ -1700,11 +1713,26 @@ public class CalibActivity extends AppCompatActivity {
                         switch_state = false;
                         sad.setBackgroundColor(Color.GREEN);
                         happy.setBackgroundColor(0);
+                            neutral.setBackgroundColor(0);
+                            state_flag = true;
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             });
+                neutral.setOnClickListener(new View.OnClickListener()   {
+                        public void onClick(View v)  {
+                                try {
+                                        switch_state = false;
+                                        neutral.setBackgroundColor(Color.GREEN);
+                                        sad.setBackgroundColor(0);
+                                        happy.setBackgroundColor(0);
+                                        state_flag = false;
+                                } catch (Exception e) {
+                                        e.printStackTrace();
+                                }
+                        }
+                });
 
 
                 Runnable myRunnable = new Runnable() {
@@ -1712,13 +1740,18 @@ public class CalibActivity extends AppCompatActivity {
                         public void run() {
                                 counter =  1;
                                 while (ctr < number_images) {
-
-                                        if (Arrays.asList(urls_aversion).contains(url[ctr])) {
-                                                emotion_val = false;
-                                        } else {
-                                                emotion_val = true;
+                                        if(Arrays.asList(urls_neutral).contains(url[ctr])){
+                                                if_neutral = true;
                                         }
-                                        if(ctr != 0){
+                                        else{
+                                                if_neutral = false;
+                                                if (Arrays.asList(urls_aversion).contains(url[ctr])) {
+                                                        emotion_val = false;
+                                                } else {
+                                                        emotion_val = true;
+                                                }
+                                        }
+                                        if(ctr != 0 && !if_neutral){
                                         if (emotion_val) {
                                                 sp.play(baby_laugh, 1, 1, 0, -1, 1);
                                         } else {
@@ -1740,10 +1773,11 @@ public class CalibActivity extends AppCompatActivity {
                                         runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                        if(temp == 0){
+                                                        if (temp == 0) {
                                                                 sw.setImageResource(R.drawable.calibration_message);
-                                                        }else{
-                                                        sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));}
+                                                        } else {
+                                                                sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));
+                                                        }
                                                 }
                                         });
 
@@ -1765,13 +1799,14 @@ public class CalibActivity extends AppCompatActivity {
                                                 e.printStackTrace();
                                         }
 
+
                                         new  Thread(new Runnable() {
                                                 @Override
                                                 public void run() {
                                                         RefObjs.start_of_event = false;
 
                                                         try {
-                                                                if(temp != 0)
+                                                                if(temp != 0 && state_flag)
                                                                         RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state,dir_str);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();
@@ -1780,7 +1815,15 @@ public class CalibActivity extends AppCompatActivity {
                                                 }
                                         }).start();
 
-
+                                        runOnUiThread(new Runnable() {
+                                                @Override
+                                                public void run() {
+                                                        happy.setBackgroundColor(0);
+                                                        sad.setBackgroundColor(0);
+                                                        neutral.setBackgroundColor(0);
+                                                        state_flag = false;
+                                                }
+                                        });
                                         //                                        try {
 //                                                RefObjs.register_event(ctr>(number_images/2),switch_state);
 //                                        } catch (IOException e) {
@@ -1789,17 +1832,18 @@ public class CalibActivity extends AppCompatActivity {
 
                                sp.autoPause();
 
+                                if(state_flag) {
                                         String data;
-                                        if(switch_state){
+                                        if (switch_state) {
                                                 data = "!C" + 1 + "1";
-                                        } else{
+                                        } else {
                                                 data = "!B" + 1 + "1";
 
                                         }
                                         ByteBuffer buffer = ByteBuffer.allocate(data.length()).order(java.nio.ByteOrder.LITTLE_ENDIAN);
                                         buffer.put(data.getBytes());
                                         UartInterfaceActivity.sendDataWithCRC(buffer.array());
-
+                                }
                                 ctr++;}
 
                                 new Runnable() {
