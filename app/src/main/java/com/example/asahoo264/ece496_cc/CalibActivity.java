@@ -67,7 +67,7 @@ public class CalibActivity extends AppCompatActivity {
             "PLEASURE",
             "AVERSION"
     };
-    private static boolean emotion_val = false;
+    private static int emotion_val = 0;
         private static boolean if_neutral = false;
 
     private String[] urls_happy = {
@@ -1571,7 +1571,14 @@ public class CalibActivity extends AppCompatActivity {
     /** soundId for Later handling of sound pool **/
     private int baby_cry;
     private int baby_laugh;
-    private SoundPool sp;
+    private int animal_rights;
+    private int nature;
+    private int snakes;
+    private int spiders;
+
+
+
+        private SoundPool sp;
         private double average_conc = 0;
    // private LoadImage loader;
         private int loader;
@@ -1605,6 +1612,7 @@ public class CalibActivity extends AppCompatActivity {
                 neutral  = (ImageButton) findViewById(R.id.imageButton2);
         timertext = (TextView)findViewById(R.id.timer);
         timer = new CalibCountDownTimer(startTime,interval);
+        Log.d("Size of aversion", " is "+urls_aversion.length);
 
         dir_str = getExternalFilesDir(Environment.DIRECTORY_DOCUMENTS).toString();
         if(name!=null) {
@@ -1670,10 +1678,10 @@ public class CalibActivity extends AppCompatActivity {
 
                         } else {
                             SoundPool.Builder sp21 = new SoundPool.Builder();
-                            sp21.setAudioAttributes(new AudioAttributes.Builder()
-                                    .setUsage(AudioAttributes.USAGE_MEDIA)
-                                    .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
-                                    .build());
+                                sp21.setAudioAttributes(new AudioAttributes.Builder()
+                                        .setUsage(AudioAttributes.USAGE_MEDIA)
+                                        .setContentType(AudioAttributes.CONTENT_TYPE_SONIFICATION)
+                                        .build());
                             sp21.setMaxStreams(2);
                             sp = sp21.build();
                         }
@@ -1681,6 +1689,10 @@ public class CalibActivity extends AppCompatActivity {
 
                         baby_cry = sp.load(weakActivity.get(), R.raw.baby_cry, 1); // in 2nd param u have to pass your desire ringtone
                         baby_laugh = sp.load(weakActivity.get(), R.raw.baby_laugh, 1); // in 2nd param u have to pass your desire ringtone
+                        animal_rights = sp.load(weakActivity.get(), R.raw.animal_rights, 1); // in 2nd param u have to pass your desire ringtone
+                        nature = sp.load(weakActivity.get(), R.raw.nature, 1); // in 2nd param u have to pass your desire ringtone
+                        snakes = sp.load(weakActivity.get(), R.raw.snakes, 1); // in 2nd param u have to pass your desire ringtone
+                        spiders = sp.load(weakActivity.get(), R.raw.spiders, 1); // in 2nd param u have to pass your desire ringtone
 
                         // Initialize the textview with '0'
                         timertext.setText(String.valueOf(startTime / 1000) + " secs");
@@ -1745,18 +1757,35 @@ public class CalibActivity extends AppCompatActivity {
                                         }
                                         else{
                                                 if_neutral = false;
-                                                if (Arrays.asList(urls_aversion).contains(url[ctr])) {
-                                                        emotion_val = false;
-                                                } else {
-                                                        emotion_val = true;
+                                                if (Arrays.asList(Arrays.copyOfRange(urls_aversion,0,123)).contains(url[ctr])) {
+                                                        emotion_val = 0;
+                                                } else if(Arrays.asList(Arrays.copyOfRange(urls_aversion,124,228)).contains(url[ctr])){
+                                                        emotion_val = 1;
+                                                }else if(Arrays.asList(Arrays.copyOfRange(urls_aversion,229,361)).contains(url[ctr])){
+                                                        emotion_val = 2;
+                                                } else if(Arrays.asList(Arrays.copyOfRange(urls_aversion,362,519)).contains(url[ctr])){
+                                                        emotion_val = 3;
+                                                }else if(Arrays.asList(Arrays.copyOfRange(urls_happy,0,39)).contains(url[ctr])){
+                                                        emotion_val = 4;
+                                                }else{
+                                                        emotion_val = 5;
                                                 }
                                         }
                                         if(ctr != 0 && !if_neutral){
-                                        if (emotion_val) {
-                                                sp.play(baby_laugh, 1, 1, 0, -1, 1);
-                                        } else {
+                                        if (emotion_val == 0) {
+                                                sp.play(animal_rights, 1, 1, 0, -1, 1);
+                                        } else if(emotion_val == 1){
                                                 sp.play(baby_cry, 1, 1, 0, -1, 1);
-                                        }}
+                                        }else if(emotion_val == 2){
+                                                sp.play(snakes, 1, 1, 0, -1, 1);
+                                        }else if(emotion_val == 3){
+                                                sp.play(spiders, 1, 1, 0, -1, 1);
+                                        }else if(emotion_val == 4){
+                                                sp.play(baby_laugh, 1, 1, 0, -1, 1);
+                                        }else{
+                                                sp.play(nature, 1, 1, 0, -1, 1);
+                                        }
+                                        }
 
 
                                         new Thread(new Runnable() {
