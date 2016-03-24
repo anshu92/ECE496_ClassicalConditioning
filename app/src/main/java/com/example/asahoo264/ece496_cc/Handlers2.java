@@ -16,21 +16,21 @@ import android.widget.Button;
  * Created by YanyanZ on 2/10/16.
  */
 public class Handlers2 extends AppCompatActivity implements View.OnClickListener {
-    Button calibbutton, verifybutton;
+    Button plotbutton, verifybutton;
     String name = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_handler);
+        setContentView(R.layout.activity_handler2);
 
         Intent intent = getIntent();
         name = intent.getStringExtra("Name");
 
-        calibbutton = (Button) findViewById(R.id.calibbutton);
+        plotbutton = (Button) findViewById(R.id.plotbutton);
         verifybutton = (Button) findViewById(R.id.verifybutton);
 
-        calibbutton.setOnClickListener(this);
+        plotbutton.setOnClickListener(this);
         verifybutton.setOnClickListener(this);
 
 
@@ -39,19 +39,13 @@ public class Handlers2 extends AppCompatActivity implements View.OnClickListener
     @Override
     public void onClick(View v) {
 
-        if (v.getId() == R.id.calibbutton) {
-            Intent i = new Intent(Handlers2.this, CalibIntro.class);
-
-            i.putExtra("Name", name);
-            if(name != null) {
-                Log.d("In Handler. Name", name);
-            }
-            i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            startActivity(i);
+        if (v.getId() == R.id.plotbutton) {
+            finish();
 
 
         } else if (v.getId() == R.id.verifybutton) {
-            Intent i = new Intent(Handlers2.this, CalibVerificationHandler.class);
+            Intent i = new Intent(Handlers2.this, verificationHandler.class);
+
             i.putExtra("Name", name);
             if(name != null) {
                 Log.d("In Handler. Name", name);

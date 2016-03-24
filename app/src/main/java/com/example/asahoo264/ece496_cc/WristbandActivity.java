@@ -1,9 +1,11 @@
 package com.example.asahoo264.ece496_cc;
 
+        import android.Manifest;
         import android.app.Activity;
         import android.app.AlertDialog;
         import android.app.Fragment;
         import android.app.FragmentManager;
+        import android.content.pm.PackageManager;
         import android.bluetooth.BluetoothAdapter;
         import android.bluetooth.BluetoothDevice;
         import android.bluetooth.BluetoothGattCharacteristic;
@@ -32,7 +34,7 @@ package com.example.asahoo264.ece496_cc;
         import android.widget.ScrollView;
         import android.widget.TextView;
         import android.widget.Toast;
-
+        import android.app.SearchManager.OnDismissListener;
         //import com.adafruit.bluefruit.le.connect.R;
 
 
@@ -163,6 +165,21 @@ public class WristbandActivity extends AppCompatActivity implements BleManager.B
                 BleUtils.resetBluetoothAdapter(this, this);
             }
         }
+        /*
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) { 
+            if (this.checkSelfPermission(Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+                final AlertDialog.Builder builder = new AlertDialog.Builder(this); 
+                builder.setTitle("This app needs location access");
+                builder.setMessage("Please grant location access so this app can detect beacons.");
+                builder.setPositiveButton(android.R.string.ok, null); 
+                builder.setOnDismissListener(new DialogInterface.OnDismissListener() {  
+                    public void onDismiss(DialogInterface dialog) {
+                        requestPermissions(new String[]{Manifest.permission.ACCESS_COARSE_LOCATION}, PERMISSION_REQUEST_COARSE_LOCATION); 
+                    }  
+                }); 
+                builder.show(); 
+            }
+        }*/
     }
 
 
@@ -299,6 +316,7 @@ public class WristbandActivity extends AppCompatActivity implements BleManager.B
         return isEnabled;
     }
 
+    private static final int PERMISSION_REQUEST_COARSE_LOCATION = 1;
     private boolean manageLocationServiceAvailabilityForScanning() {
 
         boolean areLocationServiceReady = true;
@@ -321,9 +339,35 @@ public class WristbandActivity extends AppCompatActivity implements BleManager.B
                         .show();
                 DialogUtils.keepDialogOnOrientationChanges(dialog);
             }
+
         }
 
         return areLocationServiceReady;
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSION_REQUEST_COARSE_LOCATION: {
+                if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Log.d(TAG, "coarse location permission granted");
+                } else {
+                    final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+                    builder.setTitle("Functionality limited");
+                    builder.setMessage("Since location access has not been granted, this app will not be able to discover beacons when in the background.");
+                    builder.setPositiveButton(android.R.string.ok, null);
+                    builder.setOnDismissListener(new DialogInterface.OnDismissListener() {
+
+                        @Override
+                        public void onDismiss(DialogInterface dialog) {
+                        }
+
+                    });
+                    builder.show();
+                }
+                return;
+            }
+        }
     }
 
     private void connect(BluetoothDevice device) {

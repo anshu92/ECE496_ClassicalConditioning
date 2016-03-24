@@ -39,6 +39,7 @@
       <file leaf-file-name="CalibActivity.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibActivity.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="-0.48609272">
               <caret line="1759" column="37" selection-start-line="1759" selection-start-column="37" selection-end-line="1759" selection-end-column="37" />
               <folding>
@@ -64,6 +65,24 @@
                 <element signature="e#139707#139963#0" expanded="true" />
                 <element signature="e#139962#139963#0" expanded="true" />
                 <element signature="e#146704#146705#0" expanded="true" />
+=======
+            <state vertical-scroll-proportion="-0.20053476">
+              <caret line="1975" column="37" selection-start-line="1975" selection-start-column="32" selection-end-line="1975" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#129188#129792#0" expanded="true" />
+                <element signature="e#129791#129792#0" expanded="true" />
+                <element signature="e#130389#131046#0" expanded="true" />
+                <element signature="e#131045#131046#0" expanded="true" />
+                <element signature="e#131089#144488#0" expanded="true" />
+                <element signature="e#134050#134365#0" expanded="true" />
+                <element signature="e#134364#134365#0" expanded="true" />
+                <element signature="e#135689#136254#0" expanded="true" />
+                <element signature="e#136253#136254#0" expanded="true" />
+                <element signature="e#137490#137746#0" expanded="true" />
+                <element signature="e#137745#137746#0" expanded="true" />
+                <element signature="e#144487#144488#0" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
@@ -93,27 +112,19 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="activity_calib.xml" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_calib.xml">
-          <provider editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="129" column="48" selection-start-line="129" selection-start-column="48" selection-end-line="129" selection-end-column="48" />
-              <folding />
-            </state>
-          </provider>
-          <provider selected="true" editor-type-id="android-designer">
-            <state />
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="LoginActivity.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/LoginActivity.java">
+      <file leaf-file-name="MuseConnectionService.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/MuseConnectionService.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
+<<<<<<< Updated upstream
               <caret line="114" column="34" selection-start-line="114" selection-start-column="34" selection-end-line="114" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
+=======
+              <caret line="153" column="17" selection-start-line="151" selection-start-column="16" selection-end-line="153" selection-end-column="17" />
+              <folding />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -121,6 +132,7 @@
       <file leaf-file-name="CalibVerification.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerification.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="0.0">
               <caret line="1661" column="54" selection-start-line="1661" selection-start-column="54" selection-end-line="1661" selection-end-column="54" />
               <folding>
@@ -141,6 +153,32 @@
                 <element signature="e#141373#142579#0" expanded="false" />
                 <element signature="e#142578#142579#0" expanded="false" />
                 <element signature="e#142634#142635#0" expanded="false" />
+=======
+            <state vertical-scroll-proportion="-2.2962964">
+              <caret line="1603" column="37" selection-start-line="1603" selection-start-column="32" selection-end-line="1603" selection-end-column="37" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#130345#142357#0" expanded="true" />
+                <element signature="e#130869#131150#0" expanded="true" />
+                <element signature="e#131149#131150#0" expanded="true" />
+                <element signature="e#131559#131834#0" expanded="true" />
+                <element signature="e#131833#131834#0" expanded="true" />
+                <element signature="e#132184#132894#0" expanded="true" />
+                <element signature="e#132893#132894#0" expanded="true" />
+                <element signature="e#142356#142357#0" expanded="true" />
+                <element signature="e#145133#145134#0" expanded="true" />
+                <element signature="e#145199#145200#0" expanded="true" />
+                <element signature="e#145874#145875#0" expanded="true" />
+                <element signature="e#145948#145949#0" expanded="true" />
+                <element signature="e#146016#150010#0" expanded="true" />
+                <element signature="e#146838#149953#0" expanded="true" />
+                <element signature="e#149952#149953#0" expanded="true" />
+                <element signature="e#150009#150010#0" expanded="true" />
+                <element signature="e#150067#152179#0" expanded="true" />
+                <element signature="e#150917#152123#0" expanded="true" />
+                <element signature="e#152122#152123#0" expanded="true" />
+                <element signature="e#152178#152179#0" expanded="true" />
+>>>>>>> Stashed changes
               </folding>
             </state>
           </provider>
@@ -149,21 +187,35 @@
       <file leaf-file-name="SVM.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/SVM.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="0.0">
               <caret line="375" column="33" selection-start-line="375" selection-start-column="33" selection-end-line="375" selection-end-column="33" />
               <folding />
+=======
+            <state vertical-scroll-proportion="-14.925926">
+              <caret line="66" column="55" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="55" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="CalibVerificationHandler.java" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerificationHandler.java">
+      <file leaf-file-name="svm.class" pinned="false" current-in-tab="false">
+        <entry file="jar://$PROJECT_DIR$/app/libs/libsvm.jar!/libsvm/svm.class">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="0.0">
               <caret line="80" column="18" selection-start-line="80" selection-start-column="18" selection-end-line="80" selection-end-column="18" />
               <folding>
                 <element signature="imports" expanded="false" />
               </folding>
+=======
+            <state vertical-scroll-proportion="-26.037037">
+              <caret line="1396" column="31" selection-start-line="1396" selection-start-column="27" selection-end-line="1396" selection-end-column="31" />
+              <folding />
+>>>>>>> Stashed changes
             </state>
           </provider>
         </entry>
@@ -171,15 +223,24 @@
       <file leaf-file-name="RefObjs.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/RefObjs.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
             <state vertical-scroll-proportion="0.0">
               <caret line="380" column="24" selection-start-line="380" selection-start-column="17" selection-end-line="380" selection-end-column="24" />
+=======
+            <state vertical-scroll-proportion="-16.703703">
+              <caret line="337" column="0" selection-start-line="337" selection-start-column="0" selection-end-line="337" selection-end-column="0" />
+>>>>>>> Stashed changes
               <folding>
-                <element signature="e#889#897#0" expanded="true" />
-                <element signature="e#961#969#0" expanded="true" />
-                <element signature="e#1045#1064#0" expanded="true" />
-                <element signature="e#1133#1141#0" expanded="true" />
-                <element signature="e#1206#1214#0" expanded="true" />
-                <element signature="e#3294#3302#0" expanded="true" />
+                <element signature="e#981#989#0" expanded="true" />
+                <element signature="e#1053#1061#0" expanded="true" />
+                <element signature="e#1137#1156#0" expanded="true" />
+                <element signature="e#1225#1233#0" expanded="true" />
+                <element signature="e#1298#1306#0" expanded="true" />
+                <element signature="e#1549#1550#0" expanded="true" />
+                <element signature="e#1581#1582#0" expanded="true" />
+                <element signature="e#1959#1960#0" expanded="true" />
+                <element signature="e#1990#1991#0" expanded="true" />
+                <element signature="e#3386#3394#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -1837,14 +1898,14 @@
         <option value="$PROJECT_DIR$/app/src/main/AndroidManifest.xml" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calibverify_handler.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/Handlers.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerification.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerificationHandler.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/SVM.java" />
-        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/RefObjs.java" />
         <option value="$PROJECT_DIR$/app/src/main/res/layout/activity_calib.xml" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/LoginActivity.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/Handlers2.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/RefObjs.java" />
         <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibActivity.java" />
+        <option value="$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerification.java" />
       </list>
     </option>
   </component>
@@ -1897,6 +1958,163 @@
               <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+<<<<<<< Updated upstream
+=======
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="layout" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="res" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="drawable" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidResFolderTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="asahoo264" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="asahoo264" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ece496_cc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidSourceTypeNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="asahoo264" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ece496_cc" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SVM.java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="ECE496_ClassicalConditioning" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="app" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidModuleNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="manifests" />
+              <option name="myItemType" value="com.android.tools.idea.navigator.nodes.AndroidManifestsGroupNode" />
+            </PATH_ELEMENT>
+          </PATH>
+>>>>>>> Stashed changes
         </subPane>
       </pane>
       <pane id="Scratches" />
@@ -2115,7 +2333,17 @@
     <editor active="true" />
     <layout>
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+<<<<<<< Updated upstream
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+=======
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.325887" sideWeight="0.5140118" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40078843" sideWeight="0.82448375" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.325887" sideWeight="0.4859882" order="2" side_tool="false" content_ui="tabs" />
+>>>>>>> Stashed changes
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Android Model" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -2157,7 +2385,15 @@
       <window_info id="Gradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3285151" sideWeight="0.4941003" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+<<<<<<< Updated upstream
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24852507" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+=======
+      <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Android Monitor" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.40078843" sideWeight="0.82448375" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3298292" sideWeight="0.8716814" order="14" side_tool="false" content_ui="tabs" />
+      <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+>>>>>>> Stashed changes
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.325887" sideWeight="0.4859882" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -2303,12 +2539,16 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="201" column="52" selection-start-line="201" selection-start-column="52" selection-end-line="201" selection-end-column="52" />
           <folding>
-            <element signature="e#889#897#0" expanded="true" />
-            <element signature="e#961#969#0" expanded="true" />
-            <element signature="e#1045#1064#0" expanded="true" />
-            <element signature="e#1133#1141#0" expanded="true" />
-            <element signature="e#1206#1214#0" expanded="true" />
-            <element signature="e#3294#3302#0" expanded="true" />
+            <element signature="e#981#989#0" expanded="true" />
+            <element signature="e#1053#1061#0" expanded="true" />
+            <element signature="e#1137#1156#0" expanded="true" />
+            <element signature="e#1225#1233#0" expanded="true" />
+            <element signature="e#1298#1306#0" expanded="true" />
+            <element signature="e#1549#1550#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#1959#1960#0" expanded="true" />
+            <element signature="e#1990#1991#0" expanded="true" />
+            <element signature="e#3386#3394#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -2416,13 +2656,6 @@
         <state />
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/app/libs/libsvm.jar!/libsvm/svm.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-4.3333335">
-          <caret line="1401" column="42" selection-start-line="1401" selection-start-column="28" selection-end-line="1401" selection-end-column="42" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/calibintro1.png">
       <provider selected="true" editor-type-id="images">
         <state />
@@ -2452,14 +2685,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
           <caret line="82" column="26" selection-start-line="82" selection-start-column="26" selection-end-line="82" selection-end-column="26" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/MuseConnectionService.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.77319586">
-          <caret line="155" column="36" selection-start-line="155" selection-start-column="36" selection-end-line="155" selection-end-column="36" />
           <folding />
         </state>
       </provider>
@@ -2592,6 +2817,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerification.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2618,6 +2844,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerificationHandler.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2628,6 +2856,7 @@
         </state>
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/SVM.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2636,11 +2865,14 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/app/src/main/res/drawable/happyicon.png">
       <provider selected="true" editor-type-id="images">
         <state />
       </provider>
     </entry>
+<<<<<<< Updated upstream
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/RefObjs.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2656,6 +2888,8 @@
         </state>
       </provider>
     </entry>
+=======
+>>>>>>> Stashed changes
     <entry file="file://$PROJECT_DIR$/app/src/main/res/layout/activity_calib.xml">
       <provider editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2687,6 +2921,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/Handlers2.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="53" column="43" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="43" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/MainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -2695,18 +2937,91 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/Handlers2.java">
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/RefObjs.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-16.703703">
+          <caret line="337" column="0" selection-start-line="337" selection-start-column="0" selection-end-line="337" selection-end-column="0" />
+          <folding>
+            <element signature="e#981#989#0" expanded="true" />
+            <element signature="e#1053#1061#0" expanded="true" />
+            <element signature="e#1137#1156#0" expanded="true" />
+            <element signature="e#1225#1233#0" expanded="true" />
+            <element signature="e#1298#1306#0" expanded="true" />
+            <element signature="e#1549#1550#0" expanded="true" />
+            <element signature="e#1581#1582#0" expanded="true" />
+            <element signature="e#1959#1960#0" expanded="true" />
+            <element signature="e#1990#1991#0" expanded="true" />
+            <element signature="e#3386#3394#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/MuseConnectionService.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
+<<<<<<< Updated upstream
           <caret line="53" column="43" selection-start-line="53" selection-start-column="43" selection-end-line="53" selection-end-column="43" />
           <folding>
             <element signature="imports" expanded="false" />
+          </folding>
+=======
+          <caret line="153" column="17" selection-start-line="151" selection-start-column="16" selection-end-line="153" selection-end-column="17" />
+          <folding />
+>>>>>>> Stashed changes
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/app/libs/libsvm.jar!/libsvm/svm.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-26.037037">
+          <caret line="1396" column="31" selection-start-line="1396" selection-start-column="27" selection-end-line="1396" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/SVM.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-14.925926">
+          <caret line="66" column="55" selection-start-line="66" selection-start-column="47" selection-end-line="66" selection-end-column="55" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibVerification.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.2962964">
+          <caret line="1603" column="37" selection-start-line="1603" selection-start-column="32" selection-end-line="1603" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#130345#142357#0" expanded="true" />
+            <element signature="e#130869#131150#0" expanded="true" />
+            <element signature="e#131149#131150#0" expanded="true" />
+            <element signature="e#131559#131834#0" expanded="true" />
+            <element signature="e#131833#131834#0" expanded="true" />
+            <element signature="e#132184#132894#0" expanded="true" />
+            <element signature="e#132893#132894#0" expanded="true" />
+            <element signature="e#142356#142357#0" expanded="true" />
+            <element signature="e#145133#145134#0" expanded="true" />
+            <element signature="e#145199#145200#0" expanded="true" />
+            <element signature="e#145874#145875#0" expanded="true" />
+            <element signature="e#145948#145949#0" expanded="true" />
+            <element signature="e#146016#150010#0" expanded="true" />
+            <element signature="e#146838#149953#0" expanded="true" />
+            <element signature="e#149952#149953#0" expanded="true" />
+            <element signature="e#150009#150010#0" expanded="true" />
+            <element signature="e#150067#152179#0" expanded="true" />
+            <element signature="e#150917#152123#0" expanded="true" />
+            <element signature="e#152122#152123#0" expanded="true" />
+            <element signature="e#152178#152179#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/src/main/java/com/example/asahoo264/ece496_cc/CalibActivity.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< Updated upstream
         <state vertical-scroll-proportion="-0.48609272">
           <caret line="1759" column="37" selection-start-line="1759" selection-start-column="37" selection-end-line="1759" selection-end-column="37" />
           <folding>
@@ -2732,6 +3047,24 @@
             <element signature="e#139707#139963#0" expanded="true" />
             <element signature="e#139962#139963#0" expanded="true" />
             <element signature="e#146704#146705#0" expanded="true" />
+=======
+        <state vertical-scroll-proportion="-0.20053476">
+          <caret line="1975" column="37" selection-start-line="1975" selection-start-column="32" selection-end-line="1975" selection-end-column="37" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#129188#129792#0" expanded="true" />
+            <element signature="e#129791#129792#0" expanded="true" />
+            <element signature="e#130389#131046#0" expanded="true" />
+            <element signature="e#131045#131046#0" expanded="true" />
+            <element signature="e#131089#144488#0" expanded="true" />
+            <element signature="e#134050#134365#0" expanded="true" />
+            <element signature="e#134364#134365#0" expanded="true" />
+            <element signature="e#135689#136254#0" expanded="true" />
+            <element signature="e#136253#136254#0" expanded="true" />
+            <element signature="e#137490#137746#0" expanded="true" />
+            <element signature="e#137745#137746#0" expanded="true" />
+            <element signature="e#144487#144488#0" expanded="true" />
+>>>>>>> Stashed changes
           </folding>
         </state>
       </provider>

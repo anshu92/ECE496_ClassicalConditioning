@@ -185,7 +185,7 @@ void loop(void)
 
   // Color
   if (packetbuffer[1] == 'C') {
-   
+      Serial.println( packetbuffer[1]);
       digitalWrite (10,HIGH);
       delay(1000);
       digitalWrite (10,LOW);
@@ -194,7 +194,7 @@ void loop(void)
 
   // Buttons
   if (packetbuffer[1] == 'B') {
-    
+      Serial.println( packetbuffer[1] );
       digitalWrite (10,HIGH);
       delay(500);
       digitalWrite (10,LOW);

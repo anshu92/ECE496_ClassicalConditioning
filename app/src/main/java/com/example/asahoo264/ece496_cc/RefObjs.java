@@ -11,13 +11,16 @@ import android.widget.Toast;
 
 import com.interaxon.libmuse.Muse;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
+import java.util.StringTokenizer;
 
 /**
  * Created by asahoo264 on 2/2/2016.
@@ -259,7 +262,7 @@ public class RefObjs extends Application{
     }
 
 
-    public static double predict_event(boolean emotion_val, String dir) throws IOException {
+    public static void predict_event(boolean emotion_val, String dir) throws IOException {
 
         dir_str = dir;
 
@@ -312,7 +315,7 @@ public class RefObjs extends Application{
         final String fcontent;
         //if(alpha_var==0 && beta_var==0 && gamma_var==0 && theta_var==0)
         if(gamma_data.length == 0 || (gamma_data[0]==0 && gamma_data[1]==0 && gamma_data[2]==0 && gamma_data[3]==0))
-            return 0;
+            return;
         try {
             //fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(alpha_var) + " 2:" + String.valueOf(beta_var)  + " 3:" + String.valueOf(gamma_var) + " 4:"  +  String.valueOf(theta_var) + "\n";
             fcontent = String.valueOf(emotion_label) + " 1:" + String.valueOf(gamma_data[0]) + " 2:" + String.valueOf(gamma_data[1])  + " 3:" + String.valueOf(gamma_data[2]) + " 4:"  +  String.valueOf(gamma_data[3]) + "\n";
@@ -331,59 +334,8 @@ public class RefObjs extends Application{
 
         }
 
-        return send_predict();
     }
 
-    private static double send_predict() throws IOException {
-        String fname1 = "range1";
-        File file1 = new File(dir_str, fname1);
-        if (!file1.exists()) {
-            file1.createNewFile();
-        }
-        String fpath1 = file1.toString();
-
-        String fname2 = "svm_predict";
-        File file2 = new File(dir_str, fname2);
-        if (!file2.exists()) {
-            file2.createNewFile();
-        }
-        String fpath2 = file2.toString();
-
-        String fname3 = "svm_predict.scale";
-        File file3 = new File(dir_str, fname3);
-        if (!file3.exists()) {
-            file3.createNewFile();
-        }
-        String fpath3 = file3.toString();
-        String[] scaling = {"-r", fpath1, fpath2/*, ">"*/, fpath3};
-
-        fname1 = "svm_predict.scale";
-        file1 = new File(dir_str, fname1);
-        if (!file1.exists()) {
-            file1.createNewFile();
-        }
-        fpath1 = file1.toString();
-
-        fname2 = "svminput.scale.model";
-        file2 = new File(dir_str, fname2);
-        if (!file2.exists()) {
-            file2.createNewFile();
-        }
-        fpath2 = file2.toString();
-
-        fname3 = "svm_predict.out";
-        file3 = new File(dir_str, fname3);
-        if (!file3.exists()) {
-            file3.createNewFile();
-        }
-        fpath3 = file3.toString();
-
-        String[] testing = {fpath1, fpath2, fpath3, dir_str};
-
-        svm_scale.main(scaling);
-
-        return svm_predict_single.main(testing);
-    }
 
     private static Double average(ArrayList<Double> list) {
         // 'average' is undefined if there are no elements in the list.

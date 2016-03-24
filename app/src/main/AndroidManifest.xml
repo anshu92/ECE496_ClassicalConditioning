@@ -40,6 +40,9 @@
             android:name=".Handlers"
             android:launchMode="singleInstance" />
         <activity
+            android:name=".Handlers2"
+            android:launchMode="singleInstance" />
+        <activity
             android:name=".LoginActivity"
             android:launchMode="singleInstance" />
         <activity
@@ -55,6 +58,10 @@
         <activity android:name=".CalibVerification" />
         <activity android:name=".CalibVerificationHandler" />
         <activity android:name=".CalibVerificationResult" />
+
+        <activity android:name=".verification" />
+        <activity android:name=".verificationHandler" />
+        <activity android:name=".verificationResult" />
 
         <activity android:name=".CalibIntro">
         </activity>

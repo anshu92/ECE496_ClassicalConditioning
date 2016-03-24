@@ -1649,7 +1649,10 @@ public class CalibActivity extends AppCompatActivity {
                         int index = r.nextInt(urls.length - 1);
                         url[i] = urls[index];
                         if(i%2 == 1){
-                                if (index >= 210) {
+                                if(Arrays.asList(urls_neutral).contains(url[ctr])){
+                                        url[i] = urls_happy[r.nextInt(urls_happy.length - 1)];
+                                }
+                                else if (Arrays.asList(urls_aversion).contains(url[ctr])) {
                                         aversion_counter++;
                                         if (aversion_counter > 3) {
                                                 aversion_counter = 0;
@@ -1822,6 +1825,21 @@ public class CalibActivity extends AppCompatActivity {
                                                         sw.setImageBitmap(null);
                                                 }
                                         });
+
+
+                                        if(state_flag) {
+                                                String data;
+                                                if (switch_state) {
+                                                        data = "!C" + 1 + "1";
+                                                } else {
+                                                        data = "!B" + 1 + "1";
+
+                                                }
+                                                ByteBuffer buffer = ByteBuffer.allocate(data.length()).order(java.nio.ByteOrder.LITTLE_ENDIAN);
+                                                buffer.put(data.getBytes());
+                                                UartInterfaceActivity.sendDataWithCRC(buffer.array());
+                                        }
+
                                         try {
                                                 Thread.sleep(4000); // Waits for 1 second (1000 milliseconds)
                                         } catch (InterruptedException e) {
@@ -1861,18 +1879,7 @@ public class CalibActivity extends AppCompatActivity {
 
                                sp.autoPause();
 
-                                if(state_flag) {
-                                        String data;
-                                        if (switch_state) {
-                                                data = "!C" + 1 + "1";
-                                        } else {
-                                                data = "!B" + 1 + "1";
 
-                                        }
-                                        ByteBuffer buffer = ByteBuffer.allocate(data.length()).order(java.nio.ByteOrder.LITTLE_ENDIAN);
-                                        buffer.put(data.getBytes());
-                                        UartInterfaceActivity.sendDataWithCRC(buffer.array());
-                                }
                                 ctr++;}
 
                                 new Runnable() {
