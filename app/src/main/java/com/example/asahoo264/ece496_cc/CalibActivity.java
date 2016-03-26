@@ -1649,10 +1649,11 @@ public class CalibActivity extends AppCompatActivity {
                         int index = r.nextInt(urls.length - 1);
                         url[i] = urls[index];
                         if(i%2 == 1){
-                                if(Arrays.asList(urls_neutral).contains(url[ctr])){
+                                if(Arrays.asList(urls_neutral).contains(url[i])){
                                         url[i] = urls_happy[r.nextInt(urls_happy.length - 1)];
                                 }
-                                else if (Arrays.asList(urls_aversion).contains(url[ctr])) {
+
+                                if (Arrays.asList(urls_aversion).contains(url[i])) {
                                         aversion_counter++;
                                         if (aversion_counter > 3) {
                                                 aversion_counter = 0;

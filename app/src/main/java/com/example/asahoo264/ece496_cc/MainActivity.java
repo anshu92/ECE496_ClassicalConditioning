@@ -83,7 +83,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Intent i = new Intent(MainActivity.this, Handlers2.class);
             if(name!=null) {
                 i.putExtra("Name", name);
-                Log.d("In Main. Name", name);
+                Log.d("In Main2. Name", name);
             }
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

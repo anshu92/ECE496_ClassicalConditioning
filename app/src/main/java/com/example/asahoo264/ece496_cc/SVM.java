@@ -692,15 +692,17 @@ class svm_scale
         if(feature_max[index] == feature_min[index])
             return;
 
-        if(value == feature_min[index])
+        if(value <= feature_min[index])
             value = lower;
-        else if(value == feature_max[index])
+        else if(value >= feature_max[index])
             value = upper;
         else
             value = lower + (upper-lower) *
                     (value-feature_min[index])/
                     (feature_max[index]-feature_min[index]);
 
+        Log.d("Lower: ", "" + lower);
+        Log.d("Upper: ", "" + upper);
         if(value != 0)
         {
             if(output!=null){

@@ -48,7 +48,7 @@ public class Handlers2 extends AppCompatActivity implements View.OnClickListener
 
             i.putExtra("Name", name);
             if(name != null) {
-                Log.d("In Handler. Name", name);
+                Log.d("In Handler2. Name", name);
             }
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

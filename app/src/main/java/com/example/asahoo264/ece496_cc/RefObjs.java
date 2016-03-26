@@ -282,6 +282,9 @@ public class RefObjs extends Application{
                 }
                 gamma_mean[i] = gamma_sum[i] / gamma_val.size();
                 gamma_data[i] = gamma_mean[i];
+                if(gamma_data[i] == 0){
+                    //gamma_data[i] = 0.0001;
+                }
             }
 
             for (int i = 0; i < 4; i++) {
@@ -307,6 +310,8 @@ public class RefObjs extends Application{
 
         String fname = "svm_predict";
         File file = new File(dir_str, fname);
+
+        Log.d("File: ", file.toString());
         // If file does not exists, then create it
         if (!file.exists()) {
             file.createNewFile();

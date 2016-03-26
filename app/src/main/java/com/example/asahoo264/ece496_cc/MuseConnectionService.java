@@ -96,7 +96,7 @@ public class MuseConnectionService extends IntentService {
                 fileWriter.addAnnotationString(1, "ConnectActivity onCreate");
                 dataListener.setFileWriter(fileWriter);
 
-
+/*
                 String fname = "svminput";
                 File file = new File(dir_str, fname);
 
@@ -161,6 +161,7 @@ public class MuseConnectionService extends IntentService {
                 }
 
                 fileWriter.open();
+                */
             }
         }
         }
