@@ -1416,6 +1416,22 @@ public class CalibVerification extends AppCompatActivity {
                                         emotion_val = true;
                                 }
 
+                                /*
+                                new Thread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                                RefObjs.start_of_event = true;
+                                        }
+                                }).start();*/
+
+                                timer.start();
+
+                                try {
+                                        Thread.sleep(2000); // Waits for 1 second (1000 milliseconds)
+                                } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                }
+
                                 new Thread(new Runnable() {
                                         @Override
                                         public void run() {
@@ -1423,10 +1439,8 @@ public class CalibVerification extends AppCompatActivity {
                                         }
                                 }).start();
 
-                                timer.start();
-
                                 try {
-                                        Thread.sleep(8000); // Waits for 1 second (1000 milliseconds)
+                                        Thread.sleep(6000); // Waits for 1 second (1000 milliseconds)
                                 } catch (InterruptedException e) {
                                         e.printStackTrace();
                                 }

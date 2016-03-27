@@ -45,6 +45,8 @@ public class Handlers extends AppCompatActivity implements View.OnClickListener 
             i.putExtra("Name", name);
             if(name != null) {
                 Log.d("In Handler. Name", name);
+            }else{
+                Log.d("In Handler. Name", "empty");
             }
             i.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             startActivity(i);

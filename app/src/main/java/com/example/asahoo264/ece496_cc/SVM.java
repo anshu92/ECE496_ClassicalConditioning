@@ -701,8 +701,8 @@ class svm_scale
                     (value-feature_min[index])/
                     (feature_max[index]-feature_min[index]);
 
-        Log.d("Lower: ", "" + lower);
-        Log.d("Upper: ", "" + upper);
+        //Log.d("Lower: ", "" + lower);
+        //Log.d("Upper: ", "" + upper);
         if(value != 0)
         {
             if(output!=null){

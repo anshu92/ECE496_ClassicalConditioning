@@ -1717,6 +1717,14 @@ public class CalibActivity extends AppCompatActivity {
                                     sad.setBackgroundColor(0);
                                     neutral.setBackgroundColor(0);
                                     state_flag = true;
+
+                                    new Thread(new Runnable() {
+                                            @Override
+                                            public void run() {
+                                                    RefObjs.start_of_event = true;
+                                            }
+                                    }).start();
+
                             } catch (Exception e) {
                                     e.printStackTrace();
                             }
@@ -1731,6 +1739,13 @@ public class CalibActivity extends AppCompatActivity {
                         happy.setBackgroundColor(0);
                             neutral.setBackgroundColor(0);
                             state_flag = true;
+
+                            new Thread(new Runnable() {
+                                    @Override
+                                    public void run() {
+                                            RefObjs.start_of_event = true;
+                                    }
+                            }).start();
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
@@ -1791,13 +1806,6 @@ public class CalibActivity extends AppCompatActivity {
                                         }
                                         }
 
-
-                                        new Thread(new Runnable() {
-                                                   @Override
-                                                   public void run() {
-                                                           RefObjs.start_of_event = true;
-                                                   }
-                                           }).start();
 
                                         timer.start();
                                         final int temp = ctr;
@@ -2017,8 +2025,8 @@ public class CalibActivity extends AppCompatActivity {
                                 svm_scale.main(scaling2);
 
 
-                                svm_train.main(training3);
                                 svm_train.main(training2);
+                                svm_train.main(training3);
 
                                 svm_predict.main(testing2);
                             } catch (IOException e) {
@@ -2104,6 +2112,8 @@ public class CalibActivity extends AppCompatActivity {
 
                         // show it
                         alertDialog.show();
+
+                        finish();
 
                 }
         }
