@@ -34,6 +34,9 @@
             android:name=".CalibActivity"
             android:launchMode="singleInstance" />
         <activity
+            android:name=".CalibResult"
+            android:launchMode="singleInstance" />
+        <activity
             android:name=".Authentication"
             android:launchMode="singleInstance" />
         <activity

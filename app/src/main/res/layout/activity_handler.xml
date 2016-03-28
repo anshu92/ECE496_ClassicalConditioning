@@ -14,7 +14,7 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.33">
 
             <Button
                 android:layout_width="fill_parent"
@@ -27,11 +27,26 @@
             android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_weight="0.5">
+            android:layout_weight="0.33">
 
             <Button
                 android:layout_width="fill_parent"
                 android:layout_height="fill_parent"
+                android:text="training result"
+                android:id="@+id/predictbutton"
+                android:longClickable="true"
+                android:singleLine="true" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"
+            android:layout_weight="0.33">
+
+            <Button
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:text="Verification"
                 android:id="@+id/verifybutton" />
         </LinearLayout>

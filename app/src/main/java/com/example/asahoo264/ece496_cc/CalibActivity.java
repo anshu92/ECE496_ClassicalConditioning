@@ -2113,7 +2113,7 @@ public class CalibActivity extends AppCompatActivity {
                         // show it
                         alertDialog.show();
 
-                        finish();
+                        //finish();
 
                 }
         }
