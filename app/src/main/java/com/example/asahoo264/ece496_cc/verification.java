@@ -35,7 +35,7 @@ import java.util.Random;
 import java.util.logging.Handler;
 
 public class verification extends AppCompatActivity {
-        String name = null;
+        String name = "";
         private ImageView sw;
         private final Random r = new Random();
 

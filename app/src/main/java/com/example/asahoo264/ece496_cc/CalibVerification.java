@@ -37,7 +37,7 @@ import java.util.logging.Handler;
 import static android.os.Environment.isExternalStorageRemovable;
 
 public class CalibVerification extends AppCompatActivity {
-        String name = null;
+        String name = "";
         private ImageView sw;
         private final Random r = new Random();
 

@@ -59,7 +59,7 @@ import java.util.logging.Handler;
 import static android.os.Environment.isExternalStorageRemovable;
 
 public class CalibActivity extends AppCompatActivity {
-        String name = null;
+        String name = "";
     private ImageView sw;
     private final Random r = new Random();
     public static int id = 4;
@@ -1648,7 +1648,7 @@ public class CalibActivity extends AppCompatActivity {
                 for(int i =0; i<number_images;i++) {
                         int index = r.nextInt(urls.length - 1);
                         url[i] = urls[index];
-                        if(i%2 == 1){
+                        if(i%4 != 1){
                                 if(Arrays.asList(urls_neutral).contains(url[i])){
                                         url[i] = urls_happy[r.nextInt(urls_happy.length - 1)];
                                 }
@@ -1770,6 +1770,34 @@ public class CalibActivity extends AppCompatActivity {
                         @Override
                         public void run() {
                                 counter =  1;
+
+                                timer.start();
+
+                                runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                                sw.setImageResource(R.drawable.calibration_message);
+
+                                        }
+                                });
+
+                                try {
+                                        Thread.sleep(9000); // Waits for 1 second (1000 milliseconds)
+                                } catch (InterruptedException e) {
+                                        e.printStackTrace();
+                                }
+
+                                runOnUiThread(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                                sw.setImageBitmap(null);
+                                                happy.setBackgroundColor(0);
+                                                sad.setBackgroundColor(0);
+                                                neutral.setBackgroundColor(0);
+                                                state_flag = false;
+                                        }
+                                });
+
                                 while (ctr < number_images) {
                                         if(Arrays.asList(urls_neutral).contains(url[ctr])){
                                                 if_neutral = true;
@@ -1790,7 +1818,7 @@ public class CalibActivity extends AppCompatActivity {
                                                         emotion_val = 5;
                                                 }
                                         }
-                                        if(ctr != 0 && !if_neutral){
+                                        if(!if_neutral){
                                         if (emotion_val == 0) {
                                                 sp.play(animal_rights, 1, 1, 0, -1, 1);
                                         } else if(emotion_val == 1){
@@ -1814,11 +1842,7 @@ public class CalibActivity extends AppCompatActivity {
                                         runOnUiThread(new Runnable() {
                                                 @Override
                                                 public void run() {
-                                                        if (temp == 0) {
-                                                                sw.setImageResource(R.drawable.calibration_message);
-                                                        } else {
-                                                                sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));
-                                                        }
+                                                        sw.setImageBitmap(getBitmapFromMemCache(String.valueOf(temp)));
                                                 }
                                         });
 
@@ -1862,7 +1886,7 @@ public class CalibActivity extends AppCompatActivity {
                                                         RefObjs.start_of_event = false;
 
                                                         try {
-                                                                if(temp != 0 && state_flag)
+                                                                if(state_flag)
                                                                         RefObjs.register_event(weakActivity,temp<(number_images*0.8),switch_state,dir_str);
                                                         } catch (IOException e) {
                                                                 e.printStackTrace();

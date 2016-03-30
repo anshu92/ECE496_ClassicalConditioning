@@ -20,8 +20,8 @@ import java.io.IOException;
 public class CalibResult extends AppCompatActivity  implements View.OnClickListener{
     private TextView tv;
     private static final int SHOW_IMAGE = 0;
-    String name = null;
-    String dir_str = null;
+    String name = "";
+    String dir_str = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -121,8 +121,8 @@ public class CalibResult extends AppCompatActivity  implements View.OnClickListe
                 file2.createNewFile();
             }
             fpath2 = file2.toString();
-            String[] training2 = {"-v", "5", fpath1, fpath2};
-            String[] training3 = {fpath1, fpath2};
+            String[] training2 = {"-c", "2048", "-g", "0.00048828125", "-b", "1", "-v", "5", fpath1, fpath2};
+            //String[] training3 = {"-b", "1", fpath1, fpath2};
 
             fname1 = "svminput.t";
             file1 = new File(dir_str, fname1);
@@ -167,7 +167,7 @@ public class CalibResult extends AppCompatActivity  implements View.OnClickListe
             }
             fpath3 = file3.toString();
 
-            String[] testing2 = {fpath1, fpath2, fpath3, dir_str};
+            String[] testing2 = {"-b", "1", fpath1, fpath2, fpath3, dir_str};
 
             svm_scale.main(scaling1);
 
@@ -175,7 +175,7 @@ public class CalibResult extends AppCompatActivity  implements View.OnClickListe
 
 
             svm_train.main(training2);
-            svm_train.main(training3);
+            //svm_train.main(training3);
 
             svm_predict.main(testing2);
         } catch (IOException e) {

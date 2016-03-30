@@ -18,7 +18,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     Button connectbutton,connectbutton1, authbutton, handlerbutton, handlerbutton2;
     private static final int REQUEST_LOGIN = 0;
-    String name= null;
+    String name= "";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -12,7 +12,7 @@ import android.widget.Button;
  */
 public class verificationHandler extends AppCompatActivity  implements View.OnClickListener{
     Button start;
-    String name = null;
+    String name = "";
     private static final int SHOW_IMAGE = 0;
     int count = 0;
     @Override

@@ -12,7 +12,7 @@ import com.github.paolorotolo.appintro.AppIntroFragment;
 import java.util.Random;
 
 public class CalibIntro extends AppIntro {
-    String name = null;
+    String name = "";
     // Please DO NOT override onCreate. Use init.
     @Override
     public void init(Bundle savedInstanceState) {
