@@ -12,6 +12,7 @@ import android.widget.Toast;
 import com.interaxon.libmuse.Muse;
 
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -19,6 +20,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.lang.ref.WeakReference;
+import java.net.Socket;
 import java.util.ArrayList;
 import java.util.StringTokenizer;
 
@@ -97,8 +99,34 @@ public class RefObjs extends Application{
 
   public static void updateGammaRelative(final ArrayList<Double> data) {
       Double n = average(data);
+      if(n != null&& !n.isNaN()){
+          Socket socket = null;
+          try {
+              socket = new Socket("192.168.0.16",1755);
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          DataOutputStream DOS = null;
+          try {
+              DOS = new DataOutputStream(socket.getOutputStream());
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          try {
+              DOS.writeUTF(String.valueOf(n));
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+          try {
+              socket.close();
+          } catch (IOException e) {
+              e.printStackTrace();
+          }
+
+      }
       if (start_of_event && n != null && !n.isNaN()) {
-          gamma_val_rel.add(n);        }
+          gamma_val_rel.add(n);
+      }
 
     }
 
